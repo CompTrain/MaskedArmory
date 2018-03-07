@@ -4,6 +4,7 @@
   "main": "app.js",
   "author": "Shane Jeffery <shanej@khaccounts.net>",
   "dependencies": {
+    "axios": "^0.18.0",
     "blizzard.js": "~1.6.0",
     "body-parser": "^1.16.1",
     "dotenv": "~2.0.0",
