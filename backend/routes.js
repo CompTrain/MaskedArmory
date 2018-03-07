@@ -1,9 +1,6 @@
-'use strict';
-
 const mongo = require('mongodb');
 const express = require('express');
 const router = express.Router();
-const mongoClient = mongo.MongoClient;
 const objectId = mongo.ObjectId;
 
 require('dotenv').config({ silent: true });
