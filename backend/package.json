@@ -1,0 +1,24 @@
+{
+  "name": "masked-armory",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Shane Jeffery <shanej@khaccounts.net>",
+  "dependencies": {
+    "blizzard.js": "~1.6.0",
+    "body-parser": "^1.16.1",
+    "dotenv": "~2.0.0",
+    "express": "~4.14.0",
+    "express-mongo-db": "^2.0.3",
+    "mongodb": "^2.2.22"
+  },
+  "engines": {
+    "node": "7.x",
+    "npm": "3.x"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
