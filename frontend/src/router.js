@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Router from 'vue-router';
 import CreateProfile from './components/CreateProfile.vue';
 import MainProfileView from './components/MainProfileView.vue';
 import TitleProfileView from './components/TitleProfileView.vue';
@@ -10,7 +10,7 @@ import AchievementProfileView from './components/AchievementProfileView.vue';
 import ShareProfileView from './components/ShareProfileView.vue';
 import ReportBug from './components/ReportBug.vue';
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
 const routes = [
     {
@@ -36,17 +36,17 @@ const routes = [
     {
         path: '/armory/wow/profile/:armoryId/pets',
         component: PetProfileView,
-        name: 'mounts'
+        name: 'pets'
     },
     {
         path: '/armory/wow/profile/:armoryId/reputations',
         component: ReputationProfileView,
-        name: 'mounts'
+        name: 'reputations'
     },
     {
         path: '/armory/wow/profile/:armoryId/achievements',
         component: AchievementProfileView,
-        name: 'mounts'
+        name: 'achievements'
     },
     {
         path: '/armory/wow/profile/:armoryId/share',
@@ -60,8 +60,6 @@ const routes = [
     },
 ];
 
-export default new VueRouter({
-    routes,
-    mode: 'history',
-    base: '/'
+export default new Router({
+    routes
 });

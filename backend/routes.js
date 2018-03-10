@@ -110,13 +110,31 @@ router.get('/armory/find/:id', (req, res) => {
     const collection = req.db.collection('armories');
 
     collection.findOne({_id: objectId(profileId)}, function(err, document) {
-
-        if (err) {
-            res.status(404).error('Armory not found.');
-        }
+        if (err) res.status(404).error('Armory not found.');
 
         res.status(200).json({ armory: document.data});
     });
 });
+
+router.get('/server/us/list', (req, res) => {
+    const collection = req.db.collection('usServerList');
+
+    collection.find({}).toArray(function(err, servers) {
+        if (err) res.status(404).error('Error retrieving US server list.');
+
+        res.status(200).json({ usServers: servers})
+    });
+});
+
+router.get('/server/eu/list', (req, res) => {
+    const collection = req.db.collection('euServerList');
+
+    collection.find({}).toArray(function(err, servers) {
+        if (err) res.status(404).error('Error retrieving EU server list.');
+
+        res.status(200).json({ euServers: servers})
+    });
+});
+
 
 module.exports = router;
