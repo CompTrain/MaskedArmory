@@ -10,7 +10,7 @@ const blizzard = require('blizzard.js').initialize({
 });
 
 router.post('/armory/create', (req, res) => {
-    const realm = req.body.serverName;
+    const realm = req.body.serverName.replace(/\\/g, '');
     const name = req.body.characterName;
     const origin = req.body.region;
     const locale = 'en_US';
@@ -91,17 +91,25 @@ router.post('/armory/create', (req, res) => {
 
                 armoryCollection.insert(armoryDataFormatted, function(err) {
 
+                    console.log(err);
+
                     if (err) {
                         return res.status(500).json({err});
                     }
 
                     const objectId = armoryDataFormatted._id;
 
+                    console.log(objectId);
+
                     res.status(200).json({ armoryId: objectId });
                 });
             });
         })
-        .catch(err => res.status(500).json(err.response.data));
+        .catch((err) => {
+            console.log(err);
+
+            res.status(500).json(err.response.data)
+        });
 });
 
 router.get('/armory/find/:id', (req, res) => {

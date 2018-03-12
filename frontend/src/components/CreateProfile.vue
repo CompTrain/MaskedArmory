@@ -21,6 +21,25 @@
                     </div>
                 </div>
 
+                <div v-if="armoryError" class="row row-bottom-pad">
+                    <div class="col-md-12">
+                        <div class="error-box">
+                            <div class="error-box-padding">
+                                <div v-if="armoryError == 'server'">
+                                    Please enter in your server name.
+                                </div>
+                                <div v-if="armoryError == 'character'">
+                                    Please enter in your character name.
+                                </div>
+                                <div v-if="armoryError == 'armoryCreateFailed'">
+                                    There was an error creating your profile.  This is due to a issue with the Battle.net API.
+                                    Please try again in 10-15 minutes.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12 container-bottom-pad">
                         <div class="profile-creation-box">
@@ -71,7 +90,6 @@
                                                         id="usServerName"
                                                         name="usServerName"
                                                         placeholder="Your Server Name"
-                                                        v-model="serverName"
                                                         :serverList="usServerList"
                                                 ></awesomplete-us-server-list>
                                             </div>
@@ -86,7 +104,6 @@
                                                         id="euServerName"
                                                         name="euServerName"
                                                         placeholder="Your Server Name"
-                                                        v-model="serverName"
                                                         :serverList="euServerList"
                                                 ></awesomplete-eu-server-list>
                                             </div>
@@ -97,19 +114,20 @@
                                                 <input
                                                         type="text"
                                                         class="form-control"
-                                                        id="character_name"
-                                                        name="character_name"
+                                                        id="characterName"
+                                                        name="characterName"
                                                         placeholder="Your Character Name"
-                                                        :value="characterName"
                                                 />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-sm-offset-6 col-sm-6">
+                                            <div class="col-sm-12 text-center">
                                                 <button
                                                         type="submit"
                                                         class="btn create-profile-button"
-                                                        id="create_profile">
+                                                        id="createProfile"
+                                                        @click="createArmoryProfile"
+                                                >
                                                     Create Armory Profile
                                                 </button>
                                             </div>
@@ -137,13 +155,12 @@
         components: { AwesompleteUsServerList, AwesompleteEuServerList },
         data() {
             return {
-                serverName: '',
-                characterName: '',
                 region: '',
                 usServerList: [],
                 euServerList: [],
                 usFlagActive: false,
-                euFlagActive: false
+                euFlagActive: false,
+                armoryError: ''
             }
         },
 
@@ -174,6 +191,49 @@
         },
 
         methods: {
+            createArmoryProfile(event) {
+                event.preventDefault();
+
+                let serverName = '';
+
+                if (this.region == 'us') {
+                    serverName = $('#usServerName').val();
+                } else if (this.region == 'eu') {
+                    serverName = $('#euServerName').val();
+                }
+
+                let characterName = $('#characterName').val();
+
+                if (!serverName) {
+                    this.armoryError = 'server';
+                } else if (!characterName) {
+                    this.armoryError = 'character';
+                } else {
+
+                    let createProfileButton = $('#createProfile');
+
+                    createProfileButton.prop("disabled", true);
+                    createProfileButton.text("Building Profile...");
+
+                    let postData = {
+                        region: this.region,
+                        characterName: characterName,
+                        serverName: serverName
+                    };
+
+                    this.armoryError = '';
+                    axios.post('http://localhost:5000/armory/create', postData).then((response) => {
+                        let data = response.data;
+                        router.push({ name: 'main', params: { armoryId: data.armoryId }});
+                    }).catch((err) => {
+                        this.armoryError = 'armoryCreateFailed';
+
+                        createProfileButton.prop("disabled", false);
+                        createProfileButton.text("Create Armory Profile");
+                    });
+                }
+            },
+
             setForm (region) {
                 // Doing this check to ensure that that the ref is set,
                 // so we don't get an undefined error when select a different region.
