@@ -62,9 +62,9 @@
                                             </div>
                                     </div>
                                     <template v-if="region">
-                                        <div class="form-group" v-if="region == 'us'">
+                                        <div class="form-group" v-show="region == 'us'">
                                             <div class="col-sm-12">
-                                                <awesomplete
+                                                <awesomplete-us-server-list
                                                         ref="usServerName"
                                                         class="form-control"
                                                         style="width: 340px;"
@@ -72,15 +72,14 @@
                                                         name="usServerName"
                                                         placeholder="Your Server Name"
                                                         v-model="serverName"
-                                                        key="us"
-                                                        :list="usServerList"
-                                                ></awesomplete>
+                                                        :serverList="usServerList"
+                                                ></awesomplete-us-server-list>
                                             </div>
                                         </div>
 
-                                        <div class="form-group" v-if="region == 'eu'">
+                                        <div class="form-group" v-show="region == 'eu'">
                                             <div class="col-sm-12">
-                                                <awesomplete
+                                                <awesomplete-eu-server-list
                                                         ref="euServerName"
                                                         class="form-control"
                                                         style="width: 340px;"
@@ -88,9 +87,8 @@
                                                         name="euServerName"
                                                         placeholder="Your Server Name"
                                                         v-model="serverName"
-                                                        key="eu"
-                                                        :list="euServerList"
-                                                ></awesomplete>
+                                                        :serverList="euServerList"
+                                                ></awesomplete-eu-server-list>
                                             </div>
                                         </div>
 
@@ -132,10 +130,11 @@
     import Vue from 'vue';
     import router from '../router';
     import axios from 'axios';
-    import Awesomplete from './Awesomplete.vue';
+    import AwesompleteUsServerList from './AwesompleteUsServerList.vue';
+    import AwesompleteEuServerList from './AwesompleteEuServerList.vue';
 
     export default {
-        components: { Awesomplete },
+        components: { AwesompleteUsServerList, AwesompleteEuServerList },
         data() {
             return {
                 serverName: '',
