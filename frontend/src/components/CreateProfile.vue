@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo">
-                            <img src="../assets/images/logo.png" alt="Logo" />
+                            <img src="../../static/images/logo.png" alt="Logo" />
                         </div>
                     </div>
                 </div>
@@ -224,7 +224,7 @@
                     this.armoryError = '';
                     axios.post('http://localhost:5000/armory/create', postData).then((response) => {
                         let data = response.data;
-                        router.push({ name: 'main', params: { armoryId: data.armoryId }});
+                        router.push({ name: 'main', params: { profileId: data.profileId }});
                     }).catch((err) => {
                         this.armoryError = 'armoryCreateFailed';
 

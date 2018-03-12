@@ -101,7 +101,7 @@ router.post('/armory/create', (req, res) => {
 
                     console.log(objectId);
 
-                    res.status(200).json({ armoryId: objectId });
+                    res.status(200).json({ profileId: objectId });
                 });
             });
         })
