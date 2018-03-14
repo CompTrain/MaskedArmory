@@ -160,14 +160,15 @@
                 euServerList: [],
                 usFlagActive: false,
                 euFlagActive: false,
-                armoryError: ''
+                armoryError: '',
+                apiUrl: 'https://api.legion.maskedarmory.com'
             }
         },
 
         created() {
             let self = this;
 
-            axios.get(`http://localhost:5000/server/us/list`)
+            axios.get(`${this.apiUrl}/server/us/list`)
                 .then((response) => {
                   let usServers = response.data.usServers;
 
@@ -178,7 +179,7 @@
                     console.log(error);
                 });
 
-            axios.get(`http://localhost:5000/server/eu/list`)
+            axios.get(`${this.apiUrl}/server/eu/list`)
                 .then((response) => {
                     let euServers = response.data.euServers;
 
@@ -222,7 +223,7 @@
                     };
 
                     this.armoryError = '';
-                    axios.post('http://localhost:5000/armory/create', postData).then((response) => {
+                    axios.post(`${this.apiUrl}/armory/create`, postData).then((response) => {
                         let data = response.data;
                         router.push({ name: 'main', params: { profileId: data.profileId }});
                     }).catch((err) => {

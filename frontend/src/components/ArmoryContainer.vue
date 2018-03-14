@@ -81,7 +81,7 @@
 
         data() {
             return {
-                apiUrl: 'http://localhost:5000',
+                apiUrl: 'https://api.legion.maskedarmory.com',
                 profileId: '',
                 showSpinner: false,
                 containerLoaded: false,
