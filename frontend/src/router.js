@@ -9,6 +9,9 @@ import PetProfileView from './components/PetProfileView.vue';
 import ReputationProfileView from './components/ReputationProfileView.vue';
 import AchievementProfileView from './components/AchievementProfileView.vue';
 import ShareProfileView from './components/ShareProfileView.vue';
+import ReportBug from './components/ReportBug.vue';
+import About from './components/About.vue';
+import Donate from './components/Donate.vue';
 
 Vue.use(Router);
 
@@ -67,7 +70,22 @@ const routes = [
                 props: true
             },
         ]
-    }
+    },
+    {
+        path: '/reportBug',
+        component: ReportBug,
+        name: 'reportBug'
+    },
+    {
+        path: '/donate',
+        component: Donate,
+        name: 'donate'
+    },
+    {
+        path: '/aboutMaskedArmory',
+        component: About,
+        name: 'aboutMaskedArmory'
+    },
 ];
 
 export default new Router({

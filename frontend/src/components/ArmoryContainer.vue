@@ -33,21 +33,13 @@
             </ul>
 
             <ul class="list-unstyled CTAs">
-                <li><router-link to="/donate" class="donate">Want to Donate?</router-link></li>
-                <li><router-link to="/" class="misc">Create New Profile</router-link></li>
-                <li><router-link to="/reportBug" class="misc">Report Bug</router-link></li>
-                <li><router-link to="/reportBug" class="misc">About Masked Armory</router-link></li>
+                <!--<li><router-link to="/donate" class="donate">Want to Donate?</router-link></li>-->
+                <li><router-link to="/" class="donate">Create New Profile</router-link></li>
+                <!--<li><router-link to="/reportBug" class="misc">Report Bug</router-link></li>-->
+                <!--<li><router-link to="/aboutMaskedArmory" class="misc">About Masked Armory</router-link></li>-->
             </ul>
         </nav>
         <div class="container-fluid" v-show="showSpinner">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="logo">
-                        <img src="../../static/images/logo.png" alt="Logo" />
-                    </div>
-                </div>
-            </div>
-
             <div class="spinner"></div>
         </div>
 
@@ -309,8 +301,8 @@
         display: block;
     }
     #sidebar ul li a:hover {
-        color: #fff;
-        background: #40bf40;
+        color: #40bf40;
+        background: #ffffff;
         cursor: pointer;
     }
 
