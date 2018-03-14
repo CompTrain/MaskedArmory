@@ -559,8 +559,10 @@
             };
         },
 
-        created() {
+        mounted() {
             this.profilePicture = this.buildProfilePictureLink(this.character.armory.thumbnail, this.character.armory.origin);
+            let showSpinner = false;
+            this.$emit('interface', showSpinner);
         },
 
         computed: {

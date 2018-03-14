@@ -1,33 +1,33 @@
 <template>
     <div class="wrapper">
-        <nav id="sidebar">
+        <nav id="sidebar" v-show="!showSpinner">
             <div class="sidebar-header">
                 <div>
-                    <img class="sidebar-logo" src="../../static/images/logo.png" alt="Logo" />
+                    <router-link to="/"><img class="sidebar-logo" src="../../static/images/logo.png" alt="Logo" /></router-link>
                 </div>
             </div>
 
             <ul class="list-unstyled components">
                 <p>Armory Navigation</p>
-                <li>
+                <li :class="{'active': $route.name == 'main' }">
                     <router-link :to="buildNavLink('main')">Main</router-link>
                 </li>
-                <li>
+                <li :class="{'active': $route.name == 'titles' }">
                     <router-link :to="buildNavLink('titles')">Titles</router-link>
                 </li>
-                <li>
+                <li :class="{'active': $route.name == 'mounts' }">
                     <router-link :to="buildNavLink('mounts')">Mounts</router-link>
                 </li>
-                <li>
+                <li :class="{'active': $route.name == 'pets' }">
                     <router-link :to="buildNavLink('pets')">Pets</router-link>
                 </li>
-                <li>
+                <li :class="{'active': $route.name == 'reputations' }">
                     <router-link :to="buildNavLink('reputations')">Reputations</router-link>
                 </li>
-                <li>
+                <li :class="{'active': $route.name == 'achievements' }">
                     <router-link :to="buildNavLink('achievements')">Achievements</router-link>
                 </li>
-                <li>
+                <li :class="{'active': $route.name == 'share' }">
                     <router-link :to="buildNavLink('share')">Share</router-link>
                 </li>
             </ul>
@@ -36,6 +36,7 @@
                 <li><router-link to="/donate" class="donate">Want to Donate?</router-link></li>
                 <li><router-link to="/" class="misc">Create New Profile</router-link></li>
                 <li><router-link to="/reportBug" class="misc">Report Bug</router-link></li>
+                <li><router-link to="/reportBug" class="misc">About Masked Armory</router-link></li>
             </ul>
         </nav>
         <div class="container-fluid" v-show="showSpinner">
@@ -54,14 +55,14 @@
             <div class="row row-bottom-pad">
                 <div class="col-md-12">
                     <div class="page_title">
-                        <h1 class="txt_center">Level {{ character.armory.level }} {{ getRaceName(character.armory.race) }} {{ getClassName(character.armory.class) }}</h1>
+                        <h1 class="txt_center">Level {{ levelNumber }} {{ raceName }} {{ className }}</h1>
                     </div>
                 </div>
             </div>
 
-            <div class="row row-bottom-pad">
+            <div class="row row-bottom-pad" v-if="containerLoaded">
                 <div class="col-md-12">
-                    <router-view :character="character"></router-view>
+                    <router-view :character="character" :profileId="profileId" :className="className" :raceName="raceName" :levelNumber="levelNumber" @interface="showSpinner = $event"></router-view>
                 </div>
             </div>
         </div>
@@ -91,15 +92,21 @@
                 apiUrl: 'http://localhost:5000',
                 profileId: '',
                 showSpinner: false,
-                character: ''
+                containerLoaded: false,
+                character: '',
+                levelNumber: null,
+                raceName: '',
+                className: ''
             };
         },
 
-        created() {
+        async mounted() {
             this.showSpinner = true;
             this.profileId = this.$route.params.profileId;
+            await this.getArmoryData();
+            this.containerLoaded = true;
 
-            this.getArmoryData();
+            console.log(this.$route);
         },
 
         methods: {
@@ -108,13 +115,17 @@
                 return "/armory/wow/profile/" + this.profileId + "/" + subRoute;
             },
 
-            getArmoryData() {
+            async getArmoryData() {
                 let self = this;
 
-                axios.get(this.apiUrl + "/armory/find/" + this.profileId).then(response => {
-                    self.character = response.data;
-                    self.showSpinner = false;
-                });
+                let response = await axios.get(this.apiUrl + "/armory/find/" + this.profileId);
+
+                console.log(response);
+
+                self.character = response.data;
+                self.levelNumber = self.character.armory.level;
+                self.raceName = self.getRaceName(this.character.armory.race);
+                self.className = self.getClassName(this.character.armory.class);
             },
 
             getRaceName(raceId) {
@@ -300,11 +311,13 @@
     #sidebar ul li a:hover {
         color: #fff;
         background: #40bf40;
+        cursor: pointer;
     }
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
         color: #fff;
         background: #40bf40;
+        cursor: not-allowed;
     }
 
 
@@ -323,7 +336,6 @@
     a[aria-expanded="true"]::before {
         content: '\e260';
     }
-
 
     ul ul a {
         font-size: 0.9em !important;

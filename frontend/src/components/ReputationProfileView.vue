@@ -32,8 +32,11 @@
 
         created() {
             this.reputationsSorted = this.reputationSortAndStanding(this.character.armory.reputation);
+        },
 
-            console.log(this.reputationsSorted);
+        mounted() {
+            let showSpinner = false;
+            this.$emit('interface', showSpinner);
         },
 
         methods: {

@@ -25,6 +25,11 @@
             this.titlesSorted = this.titleSort(this.character.armory.titles);
         },
 
+        mounted() {
+            let showSpinner = false;
+            this.$emit('interface', showSpinner);
+        },
+
         methods: {
             buildTitleLink(titleId) {
                 return 'https://wowhead.com/?title=' + titleId;

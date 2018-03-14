@@ -16,6 +16,11 @@
     export default {
         props: ['character'],
 
+        mounted() {
+            let showSpinner = false;
+            this.$emit('interface', showSpinner);
+        },
+
         methods: {
 
             buildQualityId(qualityId) {
