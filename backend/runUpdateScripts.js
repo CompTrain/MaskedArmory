@@ -7,10 +7,14 @@ new CronJob('0 0 23 * * *', () => {
 
         runScript('./jobs/updateAchievements.js', (err) => {
             if (err) throw err;
+
+            console.log('Achievements Updated!');
         });
 
         runScript('./jobs/updateRealmList.js', (err) => {
             if (err) throw err;
+
+            console.log('Realm Lists Updated!');
         });
     },
     null,
