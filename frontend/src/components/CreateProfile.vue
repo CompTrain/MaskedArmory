@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <div class="profile-creation-box">
                             <div class="box-padding">
-                                <span class="news">UPDATE :: Masked Armory - Legion Edition - launched officially May 1, 2017.  All existing profiles on the old Masked Armory will still work, but new profile creation will only be allowed on this website.  Hope you all like the changes!</span><br/><br/>
+                                <span class="news">3/14/2018 Update :: Masked Armory has gone through a UX/UI update to help to add more content support at a later date, depending on what Battle for Azeroth introduces.  There have been some upgrades on the server side as well to constantly keep the achievements and server lists up to date.  Those will run as nightly jobs to ensure things stay as up-to-date as possible.  Also, when you select a region below you will ONLY see the server list for that region.  There will be no more crossover or duplicate servers in the list.</span><br/><br/>
                                 <strong>Masked Armory</strong> is the most well known anonymous World of Warcraft (WoW) profile source in the Real Money Trading (RMT) market.  We hide your character and server name so that you can be protected when you are attempting to buy, sell, or trade a WoW account!  Come create your Masked Armory profile today in just a matter of seconds!
                             </div>
                         </div>

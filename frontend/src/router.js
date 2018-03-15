@@ -22,51 +22,57 @@ const routes = [
         name: '/'
     },
     {
-        path: '/armory/wow/profile/:profileId/',
+        path: '/armory/wow/profile',
         component: ArmoryContainer,
         name: 'armoryContainer',
         props: true,
         children: [
             {
-                path: 'main',
+                path: '/:profileId/main',
                 component: MainProfileView,
                 name: 'main',
                 props: true
             },
             {
-                path: 'titles',
+                path: '/:profileId/titles',
                 component: TitleProfileView,
                 name: 'titles',
                 props: true
             },
             {
-                path: 'mounts',
+                path: '/:profileId/mounts',
                 component: MountProfileView,
                 name: 'mounts',
                 props: true
             },
             {
-                path: 'pets',
+                path: '/:profileId/pets',
                 component: PetProfileView,
                 name: 'pets',
                 props: true
             },
             {
-                path: 'reputations',
+                path: '/:profileId/reputations',
                 component: ReputationProfileView,
                 name: 'reputations',
                 props: true
             },
             {
-                path: 'achievements',
+                path: '/:profileId/achievements',
                 component: AchievementProfileView,
                 name: 'achievements',
                 props: true
             },
             {
-                path: 'share',
+                path: '/:profileId/share',
                 component: ShareProfileView,
                 name: 'share',
+                props: true
+            },
+            {
+                path: '/:profileId',
+                component: MainProfileView,
+                name: 'main',
                 props: true
             },
         ]
