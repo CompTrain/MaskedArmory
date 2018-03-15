@@ -573,7 +573,7 @@
 
         methods: {
             getProfessionImage(professionName) {
-                return "../assets/images/professions/" + professionName + ".gif";
+                return "/src/assets/images/professions/" + professionName + ".gif";
             },
 
             getItemQualityClassName(slot) {
