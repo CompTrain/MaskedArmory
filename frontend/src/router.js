@@ -22,55 +22,55 @@ const routes = [
         name: '/'
     },
     {
-        path: '/armory/wow/profile',
+        path: '/armory/wow/profile/',
         component: ArmoryContainer,
         name: 'armoryContainer',
         props: true,
         children: [
             {
-                path: '/:profileId/main',
+                path: ':profileId/main',
                 component: MainProfileView,
                 name: 'main',
                 props: true
             },
             {
-                path: '/:profileId/titles',
+                path: ':profileId/titles',
                 component: TitleProfileView,
                 name: 'titles',
                 props: true
             },
             {
-                path: '/:profileId/mounts',
+                path: ':profileId/mounts',
                 component: MountProfileView,
                 name: 'mounts',
                 props: true
             },
             {
-                path: '/:profileId/pets',
+                path: ':profileId/pets',
                 component: PetProfileView,
                 name: 'pets',
                 props: true
             },
             {
-                path: '/:profileId/reputations',
+                path: ':profileId/reputations',
                 component: ReputationProfileView,
                 name: 'reputations',
                 props: true
             },
             {
-                path: '/:profileId/achievements',
+                path: ':profileId/achievements',
                 component: AchievementProfileView,
                 name: 'achievements',
                 props: true
             },
             {
-                path: '/:profileId/share',
+                path: ':profileId/share',
                 component: ShareProfileView,
                 name: 'share',
                 props: true
             },
             {
-                path: '/:profileId',
+                path: ':profileId',
                 component: MainProfileView,
                 name: 'main',
                 props: true
