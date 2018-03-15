@@ -19,7 +19,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/head.gif"
+                                 src=../assets/images/emptyslots/head.gif"
                                  class="gear"/>
                         </a>
 
@@ -38,7 +38,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static//images/emptyslots/neck.gif"
+                                 src="../assets/images/emptyslots/neck.gif"
                                  class="gear"/>
                         </a>
 
@@ -57,7 +57,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/shoulder.gif"
+                                 src="../assets/images/emptyslots/shoulder.gif"
                                  class="gear"/>
                         </a>
 
@@ -76,7 +76,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/back.gif"
+                                 src="../assets/images/emptyslots/back.gif"
                                  class="gear"/>
                         </a>
 
@@ -96,7 +96,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/chest.gif"
+                                 src="../assets/images/emptyslots/chest.gif"
                                  class="gear"/>
                         </a>
 
@@ -115,7 +115,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/shirt.gif"
+                                 src="../assets/images/emptyslots/shirt.gif"
                                  class="gear"/>
                         </a>
 
@@ -134,7 +134,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/tabard.gif"
+                                 src="../assets/images/emptyslots/tabard.gif"
                                  class="gear"/>
                         </a>
 
@@ -153,7 +153,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static//images/emptyslots/wrists.gif"
+                                 src="../assets/images/emptyslots/wrists.gif"
                                  class="gear"/>
                         </a>
 
@@ -177,7 +177,7 @@
                                class="item-image item-image-gray">
                                 <img height="45"
                                      width="45"
-                                     src="../../static/images/emptyslots/mainhand.gif"
+                                     src="../assets/images/emptyslots/mainhand.gif"
                                      class="gear"/>
                             </a>
 
@@ -196,7 +196,7 @@
                                class="item-image item-image-gray">
                                 <img height="45"
                                      width="45"
-                                     src="../../static/images/emptyslots/secondhand.gif"
+                                     src="../assets/images/emptyslots/secondhand.gif"
                                      class="gear"/>
                             </a>
                         </div>
@@ -219,7 +219,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/hands.gif"
+                                 src="../assets/images/emptyslots/hands.gif"
                                  class="gear"/>
                         </a>
 
@@ -238,7 +238,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/waist.gif"
+                                 src="../assets/images/emptyslots/waist.gif"
                                  class="gear"/>
                         </a>
 
@@ -257,7 +257,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/legs.gif"
+                                 src="../assets/images/emptyslots/legs.gif"
                                  class="gear"/>
                         </a>
 
@@ -276,7 +276,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/feet.gif"
+                                 src="../assets/images/emptyslots/feet.gif"
                                  class="gear"/>
                         </a>
 
@@ -295,7 +295,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/ring.gif"
+                                 src="../assets/images/emptyslots/ring.gif"
                                  class="gear"/>
                         </a>
 
@@ -314,7 +314,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/ring.gif"
+                                 src="../assets/images/emptyslots/ring.gif"
                                  class="gear"/>
                         </a>
 
@@ -333,7 +333,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/trinket.gif"
+                                 src="../assets/images/emptyslots/trinket.gif"
                                  class="gear"/>
                         </a>
 
@@ -353,7 +353,7 @@
                            class="item-image item-image-gray">
                             <img height="45"
                                  width="45"
-                                 src="../../static/images/emptyslots/trinket.gif"
+                                 src="../assets/images/emptyslots/trinket.gif"
                                  class="gear"/>
                         </a>
                     </div>
@@ -378,7 +378,7 @@
                 <div class="widget_content">
 
                     <div class="profession_float" v-show="!character.armory.professions.primary[0].name">
-                        <img src="../../static/images/professions/None.gif" alt="None">
+                        <img src="../assets/images/professions/None.gif" alt="None">
 
                         <span class="highlight">No Profession</span>
                         <br/>
@@ -396,7 +396,7 @@
                     </div>
 
                     <div class="profession_float" v-show="!character.armory.professions.primary[1]">
-                        <img src="../../static/images/professions/None.gif" alt="None">
+                        <img src="../assets/images/professions/None.gif" alt="None">
 
                         <span class="highlight">No Profession</span>
                         <br/>
@@ -573,7 +573,7 @@
 
         methods: {
             getProfessionImage(professionName) {
-                return "../../static/images/professions/" + professionName + ".gif";
+                return "../assets/images/professions/" + professionName + ".gif";
             },
 
             getItemQualityClassName(slot) {

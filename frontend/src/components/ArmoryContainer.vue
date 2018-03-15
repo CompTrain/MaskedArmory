@@ -3,7 +3,7 @@
         <nav id="sidebar" v-show="!showSpinner">
             <div class="sidebar-header">
                 <div>
-                    <router-link to="/"><img class="sidebar-logo" src="../../static/images/logo.png" alt="Logo" /></router-link>
+                    <router-link to="/"><img class="sidebar-logo" src="../assets/images/logo.png" alt="Logo" /></router-link>
                 </div>
             </div>
 

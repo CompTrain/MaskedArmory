@@ -1,6 +1,6 @@
 body
 {
-    background: transparent url(../../static/images/background-pattern.png) repeat scroll 0% 0%;
+    background: transparent url(../assets/images/background-pattern.png) repeat scroll 0% 0%;
     color: #979797 !important;
     font-family:'Open Sans', sans-serif;
     font-size: 14px;
@@ -327,7 +327,7 @@ h1
 {
     display: inline;
     padding: 18px 14px;
-    background: url(../../static/images/menu_header.png) no-repeat top center;
+    background: url(../assets/images/menu_header.png) no-repeat top center;
     margin: 3px;
 }
 
@@ -340,7 +340,7 @@ h1
 {
     display: inline;
     padding: 18px 14px;
-    background: #0e0e0e url(../../static/images/divider.png) no-repeat bottom center;
+    background: #0e0e0e url(../assets/images/divider.png) no-repeat bottom center;
     margin: 3px;
 }
 
@@ -417,7 +417,7 @@ h1
 {
     margin-top: 25px;
     width: 100%;
-    background: #0e0e0e url(../../static/images/widget_top.png) repeat-x top left;
+    background: #0e0e0e url(../assets/images/widget_top.png) repeat-x top left;
     border: 1px solid #0e0e0e;
     color: #979797;
     margin-left: 5px;
@@ -431,7 +431,7 @@ h1
 {
     margin-top: 25px;
     width: 100%;
-    background: #0e0e0e url(../../static/images/widget_top.png) repeat-x top left;
+    background: #0e0e0e url(../assets/images/widget_top.png) repeat-x top left;
     border: 1px solid #0e0e0e;
     color: #979797;
     margin-left: 5px;
@@ -747,7 +747,7 @@ h4
     border-radius: 10px;
     height: 25px;
     border: 1px solid #2F2F2F;
-    background-image: url(../../static/images/meterbar_back.png);
+    background-image: url(../assets/images/meterbar_back.png);
     box-shadow: 0px 2px 2px black;
     color: white;
 
@@ -767,7 +767,7 @@ h4
     height: 25px;
     border-radius: 10px;
     background-color: gray;
-    background-image: url(../../static/images/progressbar_back.png);
+    background-image: url(../assets/images/progressbar_back.png);
     margin-top: -25px;
 }
 
