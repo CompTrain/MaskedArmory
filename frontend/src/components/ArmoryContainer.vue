@@ -52,11 +52,13 @@
                 </div>
             </div>
 
-            <div class="row row-bottom-pad" v-if="containerLoaded">
-                <div class="col-md-12">
-                    <router-view :character="character" :profileId="profileId" :className="className" :raceName="raceName" :levelNumber="levelNumber" @interface="showSpinner = $event"></router-view>
+            <transition name="slide-fade">
+                <div class="row row-bottom-pad" v-if="containerLoaded">
+                    <div class="col-md-12">
+                        <router-view :character="character" :profileId="profileId" :className="className" :raceName="raceName" :levelNumber="levelNumber" @interface="showSpinner = $event"></router-view>
+                    </div>
                 </div>
-            </div>
+            </transition>
         </div>
 
     </div>
@@ -365,6 +367,20 @@
     a.misc:hover {
         background: #fff !important;
         color: #40bf40 !important;
+    }
+
+    /* Enter and leave animations can use different */
+    /* durations and timing functions.              */
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active below version 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
     }
 
 

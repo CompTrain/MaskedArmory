@@ -21,9 +21,15 @@ axios.get(WOW_API_US_REALMS_URL)
         MongoClient.connect(url, function(err, client) {
             const db = client.db(dbName);
             const collection = db.collection('usServerList');
-            collection.insertMany(usServerList, () => {
-                console.log('Done updating US server list...');
+
+            collection.removeMany({}, () => {
+                console.log('Removed all US servers to replenish with new data...');
+
+                collection.insertMany(usServerList, () => {
+                    console.log('Done updating US server list...');
+                });
             });
+
             client.close();
         });
     })
@@ -46,8 +52,13 @@ axios.get(WOW_API_EU_REALMS_URL)
         MongoClient.connect(url, function(err, client) {
             const db = client.db(dbName);
             const collection = db.collection('euServerList');
-            collection.insertMany(euServerList, () => {
-                console.log('Done updating EU server list...');
+
+            collection.removeMany({}, () => {
+                console.log('Removed all US servers to replenish with new data...');
+
+                collection.insertMany(euServerList, () => {
+                    console.log('Done updating EU server list...');
+                });
             });
 
             client.close();

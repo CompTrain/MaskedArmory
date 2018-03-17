@@ -308,5 +308,4 @@
     .flag-selected {
         border: #3a893a 3px solid !important;
     }
-
 </style>
