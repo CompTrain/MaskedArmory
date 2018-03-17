@@ -54,7 +54,7 @@ axios.get(WOW_API_EU_REALMS_URL)
             const collection = db.collection('euServerList');
 
             collection.removeMany({}, () => {
-                console.log('Removed all US servers to replenish with new data...');
+                console.log('Removed all EU servers to replenish with new data...');
             });
 
             collection.insertMany(euServerList, () => {
