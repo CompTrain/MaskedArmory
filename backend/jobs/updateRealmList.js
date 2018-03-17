@@ -24,10 +24,10 @@ axios.get(WOW_API_US_REALMS_URL)
 
             collection.removeMany({}, () => {
                 console.log('Removed all US servers to replenish with new data...');
+            });
 
-                collection.insertMany(usServerList, () => {
-                    console.log('Done updating US server list...');
-                });
+            collection.insertMany(usServerList, () => {
+                console.log('Done updating US server list...');
             });
 
             client.close();
@@ -55,10 +55,10 @@ axios.get(WOW_API_EU_REALMS_URL)
 
             collection.removeMany({}, () => {
                 console.log('Removed all US servers to replenish with new data...');
+            });
 
-                collection.insertMany(euServerList, () => {
-                    console.log('Done updating EU server list...');
-                });
+            collection.insertMany(euServerList, () => {
+                console.log('Done updating EU server list...');
             });
 
             client.close();
