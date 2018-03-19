@@ -44,7 +44,7 @@
         </div>
 
         <div class="container-fluid" v-show="!showSpinner">
-            <div class="row row-bottom-pad">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="page_title">
                         <h1 class="txt_center">Level {{ levelNumber }} {{ raceName }} {{ className }}</h1>
