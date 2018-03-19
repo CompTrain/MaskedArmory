@@ -56,7 +56,7 @@
                 <div class="col-md-12">
                     <div class="ad">
                         <a href="https://www.khaccounts.net" target="_blank">
-                            <img src="../assets/images/khaccounts.jpg" class="img-responsive center-block" width="700"/>
+                            <img src="../assets/images/khaccounts_legion.jpg" class="img-responsive center-block" width="700"/>
                         </a>
                     </div>
                 </div>
