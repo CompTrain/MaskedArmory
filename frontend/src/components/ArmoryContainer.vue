@@ -52,6 +52,16 @@
                 </div>
             </div>
 
+            <div class="row row-bottom-pad">
+                <div class="col-md-12">
+                    <div class="ad">
+                        <a href="https://www.khaccounts.net" target="_blank">
+                            <img src="../assets/images/khaccounts.jpg" class="img-responsive center-block" width="700"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <transition name="slide-fade">
                 <div class="row row-bottom-pad" v-if="containerLoaded">
                     <div class="col-md-12">
@@ -60,6 +70,16 @@
                 </div>
             </transition>
         </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 nav-footer-index text-center">
+                    <span style="padding-right: 15px;"><a class="top-level-link news" href="https://www.khaccounts.net/" target="_blank">Buy Sell WoW Accounts</a></span>
+                    <span style="padding-right: 15px;"><a class="top-level-link" href="https://www.khaccounts.net/buy-wow-accounts" target="_blank">Buy High End Elite Premium WoW Accounts</a></span>
+                    <span><a class="top-level-link" href="https://www.khaccounts.net/sell-wow-accounts" target="_blank">Sell High End Elite Premium WoW Accounts</a></span>
+                </div>
+            </div>
+
 
     </div>
 </template>
