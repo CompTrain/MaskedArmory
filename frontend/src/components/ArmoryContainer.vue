@@ -203,6 +203,9 @@
                     this.reportBugName = '';
                     this.reportBugEmail = '';
                     this.reportBugExplanation = '';
+
+                    sendBugReportButton.prop("disabled", false);
+                    sendBugReportButton.text("Send Report");
                 }).catch((err) => {
                     this.reportBugSuccess = false;
                     this.reportBugError = true;
