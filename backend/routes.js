@@ -197,5 +197,31 @@ router.get('/server/eu/list', (req, res) => {
     });
 });
 
+router.post('/report-bug', (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const explanation = req.body.explanation;
+
+    const ses = require('node-ses');
+    const sesClient = ses.createClient({ key: process.env.AWS_ACCESS_KEY_ID, secret: process.env.AWS_SECRET_ACCESS_KEY });
+
+    sesClient.sendEmail({
+        to: 'shanej@khaccounts.net',
+        from: 'shanej@khaccounts.net',
+        subject: 'New Bug Report | Site Feedback',
+        message: `Bug has been reported or feedback has been given:
+            
+                <strong>Name:</strong> ${name}
+                <strong>Email:</strong> ${email}
+                <strong>Explanation:</strong> ${explanation}`,
+        altText: `Bug has been reported or feedback has been given:
+            
+                Name: ${name}
+                Email: ${email}
+                Explanation: ${explanation}`
+    }, (err, data, res) => {});
+
+    res.json({ success: true });
+});
 
 module.exports = router;

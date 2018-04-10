@@ -8,35 +8,34 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Armory Navigation</p>
+                <p><i class="fas fa-bars fa-fw" style="margin-right: 10px;"></i>Armory Navigation</p>
                 <li :class="{'active': $route.name == 'main' }">
-                    <router-link :to="buildNavLink('main')">Main</router-link>
+                    <router-link :to="buildNavLink('main')"><i class="fas fa-home fa-fw" style="margin-right: 10px;"></i>Main</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'titles' }">
-                    <router-link :to="buildNavLink('titles')">Titles</router-link>
+                    <router-link :to="buildNavLink('titles')"><i class="fas fa-list fa-fw" style="margin-right: 10px;"></i>Titles</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'mounts' }">
-                    <router-link :to="buildNavLink('mounts')">Mounts</router-link>
+                    <router-link :to="buildNavLink('mounts')"><i class="fas fa-motorcycle fa-fw" style="margin-right: 10px;"></i>Mounts</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'pets' }">
-                    <router-link :to="buildNavLink('pets')">Pets</router-link>
+                    <router-link :to="buildNavLink('pets')"><i class="fas fa-paw fa-fw" style="margin-right: 10px;"></i>Pets</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'reputations' }">
-                    <router-link :to="buildNavLink('reputations')">Reputations</router-link>
+                    <router-link :to="buildNavLink('reputations')"><i class="fas fa-align-left fa-fw" style="margin-right: 10px;"></i>Reputations</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'achievements' }">
-                    <router-link :to="buildNavLink('achievements')">Achievements</router-link>
+                    <router-link :to="buildNavLink('achievements')"><i class="fas fa-trophy fa-fw" style="margin-right: 10px;"></i>Achievements</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'share' }">
-                    <router-link :to="buildNavLink('share')">Share</router-link>
+                    <router-link :to="buildNavLink('share')"><i class="fas fa-share fa-fw" style="margin-right: 10px;"></i>Share</router-link>
                 </li>
             </ul>
 
             <ul class="list-unstyled CTAs">
-                <!--<li><router-link to="/donate" class="donate">Want to Donate?</router-link></li>-->
-                <li><router-link to="/" class="donate">Create New Profile</router-link></li>
-                <!--<li><router-link to="/reportBug" class="misc">Report Bug</router-link></li>-->
-                <!--<li><router-link to="/aboutMaskedArmory" class="misc">About Masked Armory</router-link></li>-->
+                <li><a href="#" class="btn donate" @click="showDonateModal">Want to Donate?</a></li>
+                <li><a href="#" class="btn misc" @click="showReportBugDialog">Report Bug | Site Feedback</a></li>
+                <li><a href="#" class="btn misc" @click="showAboutModal">About Masked Armory</a></li>
             </ul>
         </nav>
         <div class="container-fluid" v-show="showSpinner">
@@ -62,25 +61,70 @@
                 </div>
             </div>
 
-            <transition name="slide-fade">
-                <div class="row row-bottom-pad" v-if="containerLoaded">
-                    <div class="col-md-12">
+            <div class="row row-bottom-pad" v-if="containerLoaded">
+                <div class="col-md-12">
+                    <transition name="fade">
                         <router-view :character="character" :profileId="profileId" :className="className" :raceName="raceName" :levelNumber="levelNumber" @interface="showSpinner = $event"></router-view>
-                    </div>
-                </div>
-            </transition>
-        </div>
-
-
-            <div class="row">
-                <div class="col-xs-12 nav-footer-index text-center">
-                    <span style="padding-right: 15px;"><a class="top-level-link news" href="https://www.khaccounts.net/" target="_blank">Buy Sell WoW Accounts</a></span>
-                    <span style="padding-right: 15px;"><a class="top-level-link" href="https://www.khaccounts.net/buy-wow-accounts" target="_blank">Buy High End Elite Premium WoW Accounts</a></span>
-                    <span><a class="top-level-link" href="https://www.khaccounts.net/sell-wow-accounts" target="_blank">Sell High End Elite Premium WoW Accounts</a></span>
+                    </transition>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
+            <div class="col-xs-12 nav-footer-index text-center">
+                <span style="padding-right: 15px;"><a class="top-level-link news" href="https://www.khaccounts.net/" target="_blank">Buy Sell WoW Accounts</a></span>
+                <span style="padding-right: 15px;"><a class="top-level-link" href="https://www.khaccounts.net/buy-wow-accounts" target="_blank">Buy High End Elite Premium WoW Accounts</a></span>
+                <span><a class="top-level-link" href="https://www.khaccounts.net/sell-wow-accounts" target="_blank">Sell High End Elite Premium WoW Accounts</a></span>
+            </div>
+        </div>
 
+        <modal name="donate" height="auto" transition="fade">
+            <div>
+                <p>Since 2007, when Masked Armory was released, the site has operated without financial help.  It will continue to do so, but that doesn't mean that donations are not appreciated to cover the server costs and my own time to help to keep the site up to date!  Anything that you can donate would be truly appreciated!</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="XRS7TYPSWYAEC">
+                    <input class="paypal-btn" type="submit" name="submit" value="Donate to Masked Armory">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+        </modal>
+
+        <modal name="report-bug" height="auto" transition="fade">
+            <div>
+                <p>If you have found a bug or would like to offer up feedback about how we can make this website better, please fill out the form below and send it over!</p>
+
+                <p v-show="reportBugSuccess" class="alert alert-success">Report was successfully sent!</p>
+                <p v-show="reportBugError" class="alert alert-danger">There was an error sending the report.  Please try again.</p>
+
+                <form>
+                    <div class="form-group">
+                        <label for="reportBugName" class="formLabel">Your Name</label>
+                        <input type="text" class="form-control" id="reportBugName" placeholder="" v-model="reportBugName">
+                    </div>
+                    <div class="form-group">
+                        <label for="reportBugEmail" class="formLabel">Your E-mail</label>
+                        <input type="text" class="form-control" id="reportBugEmail" placeholder="" v-model="reportBugEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="reportBugExplanation" class="formLabel">Please explain the bug you found or let us know the feedback you have:</label>
+                        <textarea class="form-control" id="reportBugExplanation" rows="3" v-model="reportBugExplanation"></textarea>
+                    </div>
+                </form>
+
+                <p style="text-align: center;">
+                    <a href="#" class="btn misc" @click="$modal.hide('report-bug')">Close</a>
+                    <a href="#" class="btn donate" id="sendBugReport" @click="sendBugReport">Send Report</a>
+                </p>
+            </div>
+        </modal>
+
+        <modal name="about" height="auto" transition="fade">
+            <div>
+                <p><a href="https://www.maskedarmory.com" target="_blank" class="modal-link">Masked Armory</a> was originally created in the summer 2007 by <a href="https://www.linkedin.com/in/shanejeffery86/" target="_blank" class="modal-link">Shane Jeffery</a> out of a market need and has been maintained by him to-date.  Most of the options that existed at that time were very slow and didn't provide all of the information necessary to help to understand the value of the character / account.  As of April 2018, there have been over 3 MILLION profiles created.  That is quite a feat given that this website is used for the black market buying, selling, and trading of a single game, World of Warcraft.</p>
+                <p>Insofar as the technology used to run this website, it was rebuilt about a month ago using Node.js and MongoDB on the backend and Vue.js on the frontend to serve up an SPA (single page application) experience.  The site runs on AWS.</p>
+            </div>
+        </modal>
     </div>
 </template>
 
@@ -110,7 +154,12 @@
                 character: '',
                 levelNumber: null,
                 raceName: '',
-                className: ''
+                className: '',
+                reportBugName: '',
+                reportBugEmail: '',
+                reportBugExplanation: '',
+                reportBugError: false,
+                reportBugSuccess: false
             };
         },
 
@@ -119,11 +168,48 @@
             this.profileId = this.$route.params.profileId;
             await this.getArmoryData();
             this.containerLoaded = true;
-
-            console.log(this.$route);
         },
 
         methods: {
+            showDonateModal() {
+                this.$modal.show('donate');
+            },
+
+            showReportBugDialog() {
+                this.$modal.show('report-bug');
+            },
+
+            showAboutModal() {
+                this.$modal.show('about');
+            },
+
+            async sendBugReport() {
+                let sendBugReportButton = $('#sendBugReport');
+
+                sendBugReportButton.prop("disabled", true);
+                sendBugReportButton.text("Sending Bug Report...");
+
+                let postData = {
+                    name: this.reportBugName,
+                    email: this.reportBugEmail,
+                    explanation: this.reportBugExplanation
+                };
+
+                this.armoryError = '';
+                axios.post(`${this.apiUrl}/report-bug`, postData).then((response) => {
+                    this.reportBugSuccess = true;
+                    this.reportBugError = false;
+
+                    this.reportBugName = '';
+                    this.reportBugEmail = '';
+                    this.reportBugExplanation = '';
+                }).catch((err) => {
+                    this.reportBugSuccess = false;
+                    this.reportBugError = true;
+                    sendBugReportButton.prop("disabled", false);
+                    sendBugReportButton.text("Send Report");
+                });
+            },
 
             buildNavLink(subRoute) {
                 return "/armory/wow/profile/" + this.profileId + "/" + subRoute;
@@ -133,8 +219,6 @@
                 let self = this;
 
                 let response = await axios.get(this.apiUrl + "/armory/find/" + this.profileId);
-
-                console.log(response);
 
                 self.character = response.data;
                 self.levelNumber = self.character.armory.level;
@@ -289,6 +373,8 @@
         color: #979797;
         transition: all 0.3s;
         height: 100%;
+        border-radius: 10px;
+
     }
 
     .sidebar-logo {
@@ -389,20 +475,58 @@
         color: #40bf40 !important;
     }
 
-    /* Enter and leave animations can use different */
-    /* durations and timing functions.              */
-    .slide-fade-enter-active {
-        transition: all .3s ease;
-    }
-    .slide-fade-leave-active {
-        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-    .slide-fade-enter, .slide-fade-leave-to
-        /* .slide-fade-leave-active below version 2.1.8 */ {
-        transform: translateX(10px);
-        opacity: 0;
+    .fade-enter-active, .fade-leave-active {
+        transition-property: opacity;
+        transition-duration: .25s;
     }
 
+    .fade-enter-active {
+        transition-delay: .25s;
+    }
 
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
 
+    .v--modal {
+        background: black;
+        border: 1px silver solid;
+        padding: 25px;
+    }
+
+    .v--modal-overlay {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .paypal-btn {
+        display: inline-block;
+        font-family: inherit;
+        font-size: 14px;
+        background: #40bf40;
+        color: #fff;
+        text-align: center;
+        padding: 10px 14px;
+        margin: 0;
+        border: 0;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .paypal-btn:hover {
+        background: #fff;
+        color: #40bf40
+    }
+
+    .modal-link {
+        color: #40bf40;
+    }
+
+    .modal-link:hover {
+        color: #40bf40;
+        text-decoration: underline;
+    }
+
+    .formLabel {
+        color: #40bf40;
+    }
 </style>

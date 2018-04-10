@@ -30,6 +30,12 @@ body
     overflow: auto;
 }
 
+.item-content-modal {
+    background-color: #0e0e0e;
+    padding: 25px;
+    border: 1px silver solid;
+}
+
 .item-content-achievements
 {
     background-color: #0e0e0e;
@@ -572,8 +578,9 @@ h4
 
 .profile_picture
 {
-    border: 5px solid #0d0d0d;
+    border: 3px solid #0d0d0d;
     border-radius: 10px;
+    background: #0e0e0e;
 }
 
 /* Titles Tab */
