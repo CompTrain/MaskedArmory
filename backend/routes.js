@@ -219,7 +219,11 @@ router.post('/report-bug', (req, res) => {
                 Name: ${name}
                 Email: ${email}
                 Explanation: ${explanation}`
-    }, (err, data, res) => {});
+    }, (err, data, res) => {
+        console.log(err);
+        console.log(data);
+        console.log(res);
+    });
 
     res.json({ success: true });
 });
