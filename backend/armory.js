@@ -10,6 +10,8 @@ const blizzard = require('blizzard.js').initialize({
     apikey: config.get('wow_api_key')
 });
 
+// There is not a way to build these counts dynamically at the moment,
+// so we have to get these counts of the game directly.
 const totalAchievementCounts = {
     'General': 62,
     'Quests': 291,
@@ -31,11 +33,32 @@ router.post('/armory/create', (req, res) => {
     const name = req.body.characterName;
     const origin = req.body.region;
     const locale = 'en_US';
-    const keys = 'stats,professions,titles,items,reputation,mounts,pets,achievements';
+    const keys = 'stats,professions,titles,items,reputation,mounts,pets,achievements,progression';
 
     blizzard.wow.character(keys, {realm, name, origin, locale})
         .then((response) => {
             const armoryData = response.data;
+
+            // ****** START :: Handling Raid Zone Progression for T18-T21 ********
+
+            // Current tier zones -- T18-T21 -- Legion Expansion
+            const raidList = armoryData.progression.raids;
+            const raidZones = ['The Emerald Nightmare', 'Trial of Valor', 'The Nighthold', 'Tomb of Sargeras', 'Antorus, the Burning Throne'];
+
+            const raidZoneData = raidZones.map((raidZone) => {
+                for (let zone in raidList) {
+                    if (raidList[zone].name == raidZone) {
+                        return raidList[zone];
+                    }
+                }
+            });
+
+            delete armoryData['progression'];
+            armoryData['progression'] = raidZoneData;
+
+            // ****** END :: Handling Raid Zone Progression for T18-T21 ********
+
+            // ****** START :: Achievement Manipulation ********
 
             let achievementsCompleted = armoryData.achievements.achievementsCompleted;
             const achievementsCollection = req.db.collection('achievements');
@@ -141,8 +164,10 @@ router.post('/armory/create', (req, res) => {
                 // We reformulated the achievement counts, so we don't need to store all of the achievement data anymore.
                 delete armoryData['achievements'];
 
+                // ****** END :: Achievement Manipulation ********
+
                 // Need the origin to be in the data store so that we know where to pull
-                // character image renders from the Aurelia side on armory display.
+                // character image renders from the Vue side on armory display.
                 armoryData['origin'] = origin;
 
                 const armoryCollection = req.db.collection('armories');
