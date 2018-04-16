@@ -33,7 +33,7 @@ router.post('/armory/create', (req, res) => {
     const name = req.body.characterName;
     const origin = req.body.region;
     const locale = 'en_US';
-    const keys = 'stats,professions,titles,items,reputation,mounts,pets,achievements,progression';
+    const keys = 'stats,professions,titles,items,reputation,mounts,pets,achievements,progression,pvp';
 
     blizzard.wow.character(keys, {realm, name, origin, locale})
         .then((response) => {
