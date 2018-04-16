@@ -9,6 +9,8 @@ import PetProfileView from './components/PetProfileView.vue';
 import ReputationProfileView from './components/ReputationProfileView.vue';
 import AchievementProfileView from './components/AchievementProfileView.vue';
 import ShareProfileView from './components/ShareProfileView.vue';
+import ProgressionProfileView from './components/ProgressionProfileView.vue';
+import PvpProfileView from './components/PvpProfileView.vue';
 
 Vue.use(Router);
 
@@ -34,6 +36,18 @@ const routes = [
                 path: ':profileId/titles',
                 component: TitleProfileView,
                 name: 'titles',
+                props: true
+            },
+            {
+                path: ':profileId/raid-progression',
+                component: ProgressionProfileView,
+                name: 'progression',
+                props: true
+            },
+            {
+                path: ':profileId/arena-rbg-ratings',
+                component: PvpProfileView,
+                name: 'pvp',
                 props: true
             },
             {
