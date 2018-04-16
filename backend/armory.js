@@ -168,15 +168,14 @@ router.post('/armory/create', (req, res) => {
 
 router.get('/armory/find/:id', (req, res) => {
     const profileId = req.params.id;
-
     const collection = req.db.collection('armories');
 
     collection.findOne({_id: objectId(profileId)}, function(err, document) {
         if (err || isEmpty(document)) {
-            res.status(404).json({ error: 'Armory not found.' });
-        } else {
-            res.status(200).json({ armory: document.data});
+            return res.status(404).json({ error: 'Armory not found.' });
         }
+
+        res.status(200).json({ armory: document.data});
     });
 });
 
@@ -185,10 +184,10 @@ router.get('/server/us/list', (req, res) => {
 
     collection.find({}).toArray(function(err, servers) {
         if (err || servers.length === 0) {
-            res.status(404).json({ error: 'Error retrieving US server list.' });
-        } else {
-            res.status(200).json({ usServers: servers});
+            return res.status(404).json({ error: 'Error retrieving US server list.' });
         }
+
+        res.status(200).json({ usServers: servers});
     });
 });
 
@@ -197,10 +196,10 @@ router.get('/server/eu/list', (req, res) => {
 
     collection.find({}).toArray(function(err, servers) {
         if (err || servers.length === 0) {
-            res.status(404).json({ error: 'Error retrieving EU server list.' });
-        } else {
-            res.status(200).json({ euServers: servers});
+            return res.status(404).json({ error: 'Error retrieving EU server list.' });
         }
+
+        res.status(200).json({ euServers: servers});
     });
 });
 
@@ -238,9 +237,11 @@ router.post('/report-bug', (req, res) => {
 module.exports = router;
 
 function isEmpty(obj) {
-    for(let key in obj) {
-        if(obj.hasOwnProperty(key))
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
             return false;
+        }
     }
+
     return true;
 }
