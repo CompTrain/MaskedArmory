@@ -1,8 +1,11 @@
 const axios = require('axios');
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://localhost:27017';
-const dbName = 'maskedarmory';
+process.env["NODE_CONFIG_DIR"] = __dirname + "/../config/";
+const config = require('config');
+
+const url = config.get('db_connection_string');
+const dbName = config.get('db_name');
 
 const WOW_API_US_REALMS_URL = 'https://us.api.battle.net/wow/realm/status?locale=en_US&apikey=tzy322vsg3swwxy5s8hj98ejcf6uydau';
 const WOW_API_EU_REALMS_URL = 'https://eu.api.battle.net/wow/realm/status?locale=en_GB&apikey=tzy322vsg3swwxy5s8hj98ejcf6uydau';

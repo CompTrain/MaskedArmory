@@ -3,8 +3,11 @@ const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
 const objectId = mongo.ObjectId;
 
-const url = 'mongodb://localhost:27017';
-const dbName = 'maskedarmory';
+process.env["NODE_CONFIG_DIR"] = __dirname + "/../config/";
+const config = require('config');
+
+const url = config.get('db_connection_string');
+const dbName = config.get('db_name');
 
 const achievementObjectId = "5a9f580dc583c307449c93fb";
 

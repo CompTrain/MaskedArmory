@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const expressMongoDb = require('express-mongo-db');
 
-require('dotenv').config({ silent: true });
+process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
+const config = require('config');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -11,20 +12,18 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use(expressMongoDb(process.env.MONGO_CONNECTION));
+app.use(expressMongoDb(config.get('db_connection')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/', require('./routes'));
+app.use('/', require('./armory'));
 
-if (process.env.HOST_LISTENER == true) {
-    app.listen(5000, '172.26.73.152', () => {
+if (config.util.NODE_ENV === 'production') {
+    module.exports = app.listen(5000, '172.26.73.152', () => {
         console.log(`Masked Armory API listening on port 5000!`);
     });
 } else {
-    app.listen(5000, () => {
+    module.exports = app.listen(5000, () => {
         console.log(`Masked Armory API listening on port 5000!`);
     });
 }
-
-
