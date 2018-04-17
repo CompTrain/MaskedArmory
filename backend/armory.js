@@ -63,7 +63,7 @@ router.post('/armory/create', (req, res) => {
             let achievementsCompleted = armoryData.achievements.achievementsCompleted;
             const achievementsCollection = req.db.collection('achievements');
 
-            achievementsCollection.findOne({"_id": objectId(config.get('achievements_object_id'))}, function(err, achievementList) {
+            achievementsCollection.findOne({"_id": objectId(config.get('achievements_object_id'))}, (err, achievementList) => {
 
                 let achievementCounts = {};
                 let categoryAchievements = null;
@@ -173,7 +173,7 @@ router.post('/armory/create', (req, res) => {
                 const armoryCollection = req.db.collection('armories');
                 const armoryDataFormatted = {'data': armoryData};
 
-                armoryCollection.insert(armoryDataFormatted, function(err) {
+                armoryCollection.insert(armoryDataFormatted, (err) => {
 
                     if (err) {
                         return res.status(500).json({err});
@@ -195,7 +195,7 @@ router.get('/armory/find/:id', (req, res) => {
     const profileId = req.params.id;
     const collection = req.db.collection('armories');
 
-    collection.findOne({_id: objectId(profileId)}, function(err, document) {
+    collection.findOne({_id: objectId(profileId)}, (err, document) => {
         if (err || isEmpty(document)) {
             return res.status(404).json({ error: 'Armory not found.' });
         }
@@ -207,7 +207,7 @@ router.get('/armory/find/:id', (req, res) => {
 router.get('/server/us/list', (req, res) => {
     const collection = req.db.collection('usServerList');
 
-    collection.find({}).toArray(function(err, servers) {
+    collection.find({}).toArray((err, servers) => {
         if (err || servers.length === 0) {
             return res.status(404).json({ error: 'Error retrieving US server list.' });
         }
@@ -219,7 +219,7 @@ router.get('/server/us/list', (req, res) => {
 router.get('/server/eu/list', (req, res) => {
     const collection = req.db.collection('euServerList');
 
-    collection.find({}).toArray(function(err, servers) {
+    collection.find({}).toArray((err, servers) => {
         if (err || servers.length === 0) {
             return res.status(404).json({ error: 'Error retrieving EU server list.' });
         }

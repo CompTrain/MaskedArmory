@@ -913,6 +913,26 @@ h4
     margin-bottom: 10px;
 }
 
+.arena
+{
+  height: 500px !important;
+}
+
+.arena h3 {
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.arena p {
+  line-height: 5px;
+}
+
+.arena p span {
+  color: #40bf40;
+}
+
 .top-level-link {
     color: #40bf40;
 }

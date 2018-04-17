@@ -15,8 +15,14 @@
                 <li :class="{'active': $route.name == 'titles' }">
                     <router-link :to="buildNavLink('titles')"><i class="fas fa-list fa-fw" style="margin-right: 10px;"></i>Titles</router-link>
                 </li>
+                <li v-show="character.armory.progression" :class="{'active': $route.name == 'progression' }">
+                  <router-link :to="buildNavLink('raid-progression')"><i class="fas fa-clipboard-list fa-fw" style="margin-right: 10px;"></i>Legion Raid Progression</router-link>
+                </li>
+                <li v-show="character.armory.pvp" :class="{'active': $route.name == 'pvp' }">
+                  <router-link :to="buildNavLink('arena-rbg-ratings')"><i class="fas fa-star fa-fw" style="margin-right: 10px;"></i>Arena / RBG Ratings</router-link>
+                </li>
                 <li :class="{'active': $route.name == 'mounts' }">
-                    <router-link :to="buildNavLink('mounts')"><i class="fas fa-motorcycle fa-fw" style="margin-right: 10px;"></i>Mounts</router-link>
+                    <router-link :to="buildNavLink('mounts')"><i class="fab fa-sticker-mule fa-fw" style="margin-right: 10px;"></i>Mounts</router-link>
                 </li>
                 <li :class="{'active': $route.name == 'pets' }">
                     <router-link :to="buildNavLink('pets')"><i class="fas fa-paw fa-fw" style="margin-right: 10px;"></i>Pets</router-link>
@@ -140,14 +146,17 @@
     import PetProfileView from './PetProfileView.vue';
     import ReputationProfileView from './ReputationProfileView.vue';
     import AchievementProfileView from './AchievementProfileView.vue';
+    import PvpProfileView from './PvpProfileView.vue';
+    import ProgressionProfileView from './ProgressionProfileView.vue';
 
     export default {
 
-        components: { MainProfileView, TitleProfileView, MountProfileView, PetProfileView, ReputationProfileView, AchievementProfileView},
+        components: { MainProfileView, TitleProfileView, MountProfileView, PetProfileView, ReputationProfileView, AchievementProfileView, PvpProfileView, ProgressionProfileView},
 
         data() {
             return {
-                apiUrl: 'https://api.legion.maskedarmory.com',
+                // apiUrl: 'https://api.legion.maskedarmory.com',
+                apiUrl: 'http://localhost:5000',
                 profileId: '',
                 showSpinner: false,
                 containerLoaded: false,
@@ -222,6 +231,8 @@
                 let self = this;
 
                 let response = await axios.get(this.apiUrl + "/armory/find/" + this.profileId);
+
+                console.log(response);
 
                 self.character = response.data;
                 self.levelNumber = self.character.armory.level;

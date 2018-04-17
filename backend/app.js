@@ -20,10 +20,10 @@ app.use('/', require('./armory'));
 
 if (config.util.NODE_ENV === 'production') {
     module.exports = app.listen(5000, '172.26.73.152', () => {
-        console.log(`Masked Armory API listening on port 5000!`);
+        console.log(`Production -- Masked Armory API listening on port 5000!`);
     });
 } else {
     module.exports = app.listen(5000, () => {
-        console.log(`Masked Armory API listening on port 5000!`);
+        console.log(`Development -- Masked Armory API listening on port 5000!`);
     });
 }
