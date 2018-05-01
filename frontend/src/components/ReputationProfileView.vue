@@ -1,22 +1,31 @@
 <template>
-    <div class="content-rep">
-        <div class="col2-rep">
-            <div class="item-content">
-                <div v-for="rep of reputationsSorted" class="clear">
-                    <div class="rep_col1 highlight">
-                        {{ rep.name }}
-                    </div>
-                    <div class="rep_col2">
-                        <div class="meter">
-                            <span > {{ rep.value }} / {{ rep.max }}</span>
-                            <div class="meter_progress" :class="buildMeterProgressClass(rep.lowerStandingName)" :style="buildMeterProgressBar(rep)"></div>
+
+    <div>
+
+        <div class="headline">
+            <h6>Reputations</h6>
+        </div>
+
+        <div class="content-rep">
+            <div class="col2-rep">
+                <div class="item-content">
+                    <div v-for="rep of reputationsSorted" class="clear">
+                        <div class="rep_col1 highlight">
+                            {{ rep.name }}
                         </div>
+                        <div class="rep_col2">
+                            <div class="meter">
+                                <span v-if="rep.max > 0"> {{ rep.value }} / {{ rep.max }}</span>
+                                <span v-if="rep.max == 0">&nbsp;</span>
+                                <div class="meter_progress" :class="buildMeterProgressClass(rep.lowerStandingName)" :style="buildMeterProgressBar(rep)"></div>
+                            </div>
+                        </div>
+                        <div class="rep_col3" :class="rep.lowerStandingName">{{ rep.standingName }}</div>
                     </div>
-                    <div class="rep_col3" :class="rep.lowerStandingName">{{ rep.standingName }}</div>
                 </div>
             </div>
+            <div class="clear"></div>
         </div>
-        <div class="clear"></div>
     </div>
 </template>
 

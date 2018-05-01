@@ -1,13 +1,21 @@
 <template>
-    <div class="content-titles">
-        <div class="col2-titles">
-            <div class="item-content">
-                <p v-for="title of titlesSorted" class="title-padding">
-                    <a :href="buildTitleLink(title.id)" target="_blank" class="highlight">{{ title.name }}</a>
-                </p>
-            </div>
+
+    <div>
+
+        <div class="headline">
+            <h6>Titles</h6>
         </div>
-        <div class="clear"></div>
+
+        <div class="content-titles">
+            <div class="col2-titles">
+                <div class="item-content">
+                    <p v-for="title of titlesSorted" class="title-padding">
+                        <a :href="buildTitleLink(title.id)" target="_blank" class="highlight">{{ title.name }}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
 </template>
 

@@ -1,14 +1,21 @@
 <template>
-    <div class="content-mountspets">
-        <div class="item-content-pets-mounts scrollable">
-            <div v-for="mount of character.armory.mounts.collected" class="pets_thumb_outer">
-                <a class="pets_thumb" :class="buildQualityId(mount.qualityId)" :href="buildMountLink(mount.spellId)">
-                    <img :src="buildMountImage(mount.creatureId)" alt="thumb" height="100px" width="100px" />
-                </a>
-                {{ mount.name }}
-            </div>
+
+    <div>
+        <div class="headline">
+            <h6>Mount Collection</h6>
         </div>
-        <div class="clear"></div>
+
+        <div class="content-mountspets">
+            <div class="item-content-pets-mounts scrollable">
+                <div v-for="mount of character.armory.mounts.collected" class="pets_thumb_outer">
+                    <a class="pets_thumb" :class="buildQualityId(mount.qualityId)" :href="buildMountLink(mount.spellId)">
+                        <img :src="buildMountImage(mount.creatureId)" alt="thumb" height="100px" width="100px" />
+                    </a>
+                    {{ mount.name }}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
 </template>
 

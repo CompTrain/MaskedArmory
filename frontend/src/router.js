@@ -45,7 +45,7 @@ const routes = [
                 props: true
             },
             {
-                path: ':profileId/arena-rbg-ratings',
+                path: ':profileId/player-vs-player',
                 component: PvpProfileView,
                 name: 'pvp',
                 props: true

@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div class="headline">
+            <h6>Main Profile</h6>
+        </div>
+
         <div class="profile_picture_container">
             <div class="profile_picture">
                 <div class="picture" :style="profilePictureCreation">

@@ -8,41 +8,53 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p><i class="fas fa-bars fa-fw" style="margin-right: 10px;"></i>Armory Navigation</p>
-                <li :class="{'active': $route.name == 'main' }">
+                <p class="side-menu-title">Armory Navigation</p>
+
+                <li class="sidebar-link" :class="{'active': $route.name == 'main' }">
                     <router-link :to="buildNavLink('main')"><i class="fas fa-home fa-fw" style="margin-right: 10px;"></i>Main</router-link>
                 </li>
-                <li :class="{'active': $route.name == 'titles' }">
+                <li class="sidebar-link":class="{'active': $route.name == 'titles' }">
                     <router-link :to="buildNavLink('titles')"><i class="fas fa-list fa-fw" style="margin-right: 10px;"></i>Titles</router-link>
                 </li>
-                <li v-show="character.armory.progression" :class="{'active': $route.name == 'progression' }">
+                <li v-show="character.armory.progression" class="sidebar-link" :class="{'active': $route.name == 'progression' }">
                   <router-link :to="buildNavLink('raid-progression')"><i class="fas fa-clipboard-list fa-fw" style="margin-right: 10px;"></i>Legion Raid Progression</router-link>
                 </li>
-                <li v-show="character.armory.pvp" :class="{'active': $route.name == 'pvp' }">
-                  <router-link :to="buildNavLink('arena-rbg-ratings')"><i class="fas fa-star fa-fw" style="margin-right: 10px;"></i>Arena / RBG Ratings</router-link>
+                <li v-show="character.armory.pvp" class="sidebar-link" :class="{'active': $route.name == 'pvp' }">
+                  <router-link :to="buildNavLink('player-vs-player')"><i class="fas fa-star fa-fw" style="margin-right: 10px;"></i>Player Vs. Player</router-link>
                 </li>
-                <li :class="{'active': $route.name == 'mounts' }">
+                <li class="sidebar-link" :class="{'active': $route.name == 'mounts' }">
                     <router-link :to="buildNavLink('mounts')"><i class="fab fa-sticker-mule fa-fw" style="margin-right: 10px;"></i>Mounts</router-link>
                 </li>
-                <li :class="{'active': $route.name == 'pets' }">
+                <li class="sidebar-link" :class="{'active': $route.name == 'pets' }">
                     <router-link :to="buildNavLink('pets')"><i class="fas fa-paw fa-fw" style="margin-right: 10px;"></i>Pets</router-link>
                 </li>
-                <li :class="{'active': $route.name == 'reputations' }">
+                <li class="sidebar-link" :class="{'active': $route.name == 'reputations' }">
                     <router-link :to="buildNavLink('reputations')"><i class="fas fa-align-left fa-fw" style="margin-right: 10px;"></i>Reputations</router-link>
                 </li>
-                <li :class="{'active': $route.name == 'achievements' }">
+                <li class="sidebar-link" :class="{'active': $route.name == 'achievements' }">
                     <router-link :to="buildNavLink('achievements')"><i class="fas fa-trophy fa-fw" style="margin-right: 10px;"></i>Achievements</router-link>
                 </li>
-                <li :class="{'active': $route.name == 'share' }">
+                <li class="sidebar-link" :class="{'active': $route.name == 'share' }">
                     <router-link :to="buildNavLink('share')"><i class="fas fa-share fa-fw" style="margin-right: 10px;"></i>Share</router-link>
                 </li>
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li><a href="#" class="btn donate" @click="showDonateModal">Want to Donate?</a></li>
-                <li><a href="#" class="btn misc" @click="showReportBugDialog">Report Bug | Site Feedback</a></li>
-                <li><a href="#" class="btn misc" @click="showAboutModal">About Masked Armory</a></li>
+            <ul class="list-unstyled components">
+                <p class="side-menu-title">Site Navigation</p>
+
+                <li><a href="#" @click="showDonateModal"><i class="fas fa-donate fa-fw" style="margin-right: 10px;"></i>Want to Donate?</a></li>
+                <li><a href="#" @click="showReportBugDialog"><i class="fas fa-bug fa-fw" style="margin-right: 10px;"></i>Report Bug | Site Feedback</a></li>
+                <li><a href="#" @click="showAboutModal"><i class="fas fa-info fa-fw" style="margin-right: 10px;"></i>About Masked Armory</a></li>
             </ul>
+
+            <ul class="list-unstyled components">
+                <p class="side-menu-title">Advertisements</p>
+
+                <li><a href="https://www.khaccounts.net/" target="_blank"><i class="fas fa-external-link-alt fa-fw" style="margin-right: 10px;"></i>Buy Sell WoW Accounts</a></li>
+                <li><a href="https://www.khaccounts.net/buy-wow-accounts" target="_blank"><i class="fas fa-external-link-alt fa-fw" style="margin-right: 10px;"></i>Buy High End WoW Accounts</a></li>
+                <li><a href="https://www.khaccounts.net/sell-wow-accounts" target="_blank"><i class="fas fa-external-link-alt fa-fw" style="margin-right: 10px;"></i>Sell Elite WoW Accounts</a></li>
+            </ul>
+
         </nav>
         <div class="container-fluid" v-show="showSpinner">
             <div class="spinner"></div>
@@ -73,14 +85,6 @@
                         <router-view :character="character" :profileId="profileId" :className="className" :raceName="raceName" :levelNumber="levelNumber" @interface="showSpinner = $event"></router-view>
                     </transition>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 nav-footer-index text-center">
-                <span style="padding-right: 15px;"><a class="top-level-link news" href="https://www.khaccounts.net/" target="_blank">Buy Sell WoW Accounts</a></span>
-                <span style="padding-right: 15px;"><a class="top-level-link" href="https://www.khaccounts.net/buy-wow-accounts" target="_blank">Buy High End Elite Premium WoW Accounts</a></span>
-                <span><a class="top-level-link" href="https://www.khaccounts.net/sell-wow-accounts" target="_blank">Sell High End Elite Premium WoW Accounts</a></span>
             </div>
         </div>
 
@@ -381,14 +385,18 @@
     }
 
     #sidebar {
-        min-width: 250px;
-        max-width: 250px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 260px;
+        max-width: 260px;
         background: #202020;
         color: #979797;
         transition: all 0.3s;
-        height: 100%;
+        border-right: 1px #373737 solid;
         border-radius: 10px;
-
+        overflow-y: scroll;
     }
 
     .sidebar-logo {
@@ -406,12 +414,13 @@
     }
 
     #sidebar ul.components {
-        padding: 20px 0;
-        border-bottom: 1px solid #979797;
+        padding: 0 !important;
+        margin: 0 !important;
+
     }
 
     #sidebar ul p {
-        color: #fff;
+
         padding-top: 10px;
         padding-left: 10px;
         padding-right: 10px;
@@ -419,20 +428,33 @@
 
     #sidebar ul li a {
         padding: 10px;
-        font-size: 1.1em;
+
         display: block;
+        transition: all .15s ease;
+        border-left: 0px solid #40bf40;
+        font-size: 14px;
     }
+
     #sidebar ul li a:hover {
-        color: #40bf40;
-        background: #ffffff;
+        border-left: 6px solid #40bf40;
         cursor: pointer;
+        color: white;
+    }
+
+    #sidebar ul li > a:hover > svg {
+        color: #40bf40;
     }
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
         color: #fff;
-        background: #40bf40;
+        border-left: 6px solid #40bf40;
         cursor: not-allowed;
     }
+
+    #sidebar ul li.active > a > svg {
+        color: #40bf40
+    }
+
 
 
     a[data-toggle="collapse"] {
@@ -543,4 +565,9 @@
     .formLabel {
         color: #40bf40;
     }
+
+    /*.dropdown.dark .dropdown-item.active > a {*/
+        /*color: #fff;*/
+        /*border-left: 6px solid #40bf40;*/
+    /*}*/
 </style>

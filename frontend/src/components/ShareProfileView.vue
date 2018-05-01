@@ -1,16 +1,22 @@
 <template>
-    <div class="content-titles">
-        <div class="col2-titles">
-            <div class="item-content-small scrollable">
-                <p>Copy paste these into forums to easily link to your character:</p>
-                <p class="highlight underline">Forums (EpicNPC, OwnedCore, phpBB, vBulletin):</p>
-                <p class="code">
-                    [url=https://legion.maskedarmory.com/armory/wow/profile/{{ profileId }}] Anonymous Level {{ levelNumber }} {{ raceName }} {{ className }} WoW Profile | Masked Armory[/url]
-                </p>
-                <p class="highlight underline">Direct URI</p>
-                <p class="code">
-                    https://legion.maskedarmory.com/armory/wow/profile/{{ profileId }}
-                </p>
+    <div>
+        <div class="headline">
+            <h6>Share</h6>
+        </div>
+
+        <div class="content-titles">
+            <div class="col2-titles">
+                <div class="item-content-small scrollable">
+                    <p>Copy paste these into forums to easily link to your character:</p>
+                    <p class="highlight underline">Forums (EpicNPC, OwnedCore, phpBB, vBulletin):</p>
+                    <p class="code">
+                        [url=https://legion.maskedarmory.com/armory/wow/profile/{{ profileId }}] Anonymous Level {{ levelNumber }} {{ raceName }} {{ className }} WoW Profile | Masked Armory[/url]
+                    </p>
+                    <p class="highlight underline">Direct URI</p>
+                    <p class="code">
+                        https://legion.maskedarmory.com/armory/wow/profile/{{ profileId }}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
