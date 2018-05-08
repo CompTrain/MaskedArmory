@@ -18,11 +18,11 @@ axios.get(ACHIEVEMENTS_API_URL)
         let achievementList = response.data.achievements;
 
         // Use connect method to connect to the server
-        MongoClient.connect(url, function(err, client) {
+        MongoClient.connect(url, (err, client) => {
             const db = client.db(dbName);
             const collection = db.collection('achievements');
             collection.updateOne({ _id : objectId(achievementObjectId) }
-                , { $set: { achievements : achievementList } }, function(err, result) {
+                , { $set: { achievements : achievementList } }, (err, result) =>{
                     console.log("Updated achievement list...");
                 });
             client.close();

@@ -21,7 +21,7 @@ axios.get(WOW_API_US_REALMS_URL)
         });
 
         // Use connect method to connect to the server
-        MongoClient.connect(url, function(err, client) {
+        MongoClient.connect(url, (err, client) => {
             const db = client.db(dbName);
             const collection = db.collection('usServerList');
 
@@ -52,7 +52,7 @@ axios.get(WOW_API_EU_REALMS_URL)
         });
 
         // Use connect method to connect to the server
-        MongoClient.connect(url, function(err, client) {
+        MongoClient.connect(url, (err, client) => {
             const db = client.db(dbName);
             const collection = db.collection('euServerList');
 

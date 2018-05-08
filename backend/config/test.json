@@ -1,5 +1,0 @@
-{
-  "db_connection": "mongodb://localhost:27017/maskedarmory_test",
-  "db_connection_string": "mongodb://localhost:27017",
-  "db_name": "maskedarmory_test"
-}
