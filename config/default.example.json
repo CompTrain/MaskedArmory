@@ -4,6 +4,8 @@
   "db_connection_string": "mongodb://localhost:27017",
   "db_name": "maskedarmory",
   "achievements_object_id": "5a9f580dc583c307449c93fb",
+  "achievements_api_key": "sjxaqvh2pz4xgrbueauunvshpmw4s7fv",
   "aws_access_key_id": "AKIAJK5BKQ7EXLQLFCQQ",
-  "aws_secret_access_key": "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"
+  "aws_secret_access_key": "mE4ExI2FjEzSId2FPUa48R+u1Yu04jKeIFlPtsEX",
+  "production_ip_address": "172.26.73.152"
 }

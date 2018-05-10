@@ -4,69 +4,67 @@ const MongoClient = require('mongodb').MongoClient;
 process.env["NODE_CONFIG_DIR"] = __dirname + "/../config/";
 const config = require('config');
 
+const WOW_API_KEY = config.get('wow_api_key');
 const url = config.get('db_connection_string');
-const dbName = config.get('db_name');
 
-const WOW_API_US_REALMS_URL = 'https://us.api.battle.net/wow/realm/status?locale=en_US&apikey=tzy322vsg3swwxy5s8hj98ejcf6uydau';
-const WOW_API_EU_REALMS_URL = 'https://eu.api.battle.net/wow/realm/status?locale=en_GB&apikey=tzy322vsg3swwxy5s8hj98ejcf6uydau';
+updateUsRealmList().then((res) => {
+    console.log('Done updating US server list...');
+}).catch((err) => {
+    console.log(err);
+});
 
-axios.get(WOW_API_US_REALMS_URL)
-    .then((response) => {
-        let serversData = response.data.realms;
+updateEuRealmList().then((res) => {
+    console.log('Done updating EU server list...');
+}).catch((err) => {
+    console.log(err);
+});
 
-        let usServerList = serversData.map((server) => {
+async function updateUsRealmList() {
+    const WOW_API_US_REALMS_URL = 'https://us.api.battle.net/wow/realm/status?locale=en_US&apikey=' + WOW_API_KEY;
+
+    try {
+        let serverData = await axios.get(WOW_API_US_REALMS_URL);
+        const serverList = serverData.data.realms;
+
+        const usServerList = serverList.map((server) => {
             return {
                 'name': server.name
             }
         });
 
-        // Use connect method to connect to the server
-        MongoClient.connect(url, (err, client) => {
-            const db = client.db(dbName);
-            const collection = db.collection('usServerList');
+        const db = await MongoClient.connect(url);
+        const collection = db.collection('usServerList');
 
-            collection.removeMany({}, () => {
-                console.log('Removed all US servers to replenish with new data...');
-            });
+        await collection.removeMany({});
+        console.log('Removed all US servers to replenish with new data...');
 
-            collection.insertMany(usServerList, () => {
-                console.log('Done updating US server list...');
-            });
+        await collection.insertMany(usServerList)
+    } catch (err) {
+        throw err;
+    }
+}
 
-            client.close();
-        });
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+async function updateEuRealmList() {
+    const WOW_API_EU_REALMS_URL = 'https://eu.api.battle.net/wow/realm/status?locale=en_GB&apikey=' + WOW_API_KEY;
 
+    try {
+        let serverData = await axios.get(WOW_API_EU_REALMS_URL);
+        const serverList = serverData.data.realms;
 
-axios.get(WOW_API_EU_REALMS_URL)
-    .then((response) => {
-        let serversData = response.data.realms;
-
-        let euServerList = serversData.map((server) => {
+        const euServerList = serverList.map((server) => {
             return {
                 'name': server.name
             }
         });
 
-        // Use connect method to connect to the server
-        MongoClient.connect(url, (err, client) => {
-            const db = client.db(dbName);
-            const collection = db.collection('euServerList');
+        const db = await MongoClient.connect(url);
+        const collection = db.collection('euServerList');
 
-            collection.removeMany({}, () => {
-                console.log('Removed all EU servers to replenish with new data...');
-            });
+        await collection.removeMany({});
+        console.log('Removed all EU servers to replenish with new data...');
 
-            collection.insertMany(euServerList, () => {
-                console.log('Done updating EU server list...');
-            });
-
-            client.close();
-        });
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+        await collection.insertMany(euServerList)
+    } catch (err) {
+        throw err;
+    }
+}
