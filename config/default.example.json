@@ -1,11 +1,11 @@
 {
-  "wow_api_key": "tzy322vsg3swwxy5s8hj98ejcf6uydau",
-  "db_connection": "mongodb://localhost:27017/maskedarmory",
-  "db_connection_string": "mongodb://localhost:27017",
-  "db_name": "maskedarmory",
-  "achievements_object_id": "5a9f580dc583c307449c93fb",
-  "achievements_api_key": "sjxaqvh2pz4xgrbueauunvshpmw4s7fv",
-  "aws_access_key_id": "AKIAJK5BKQ7EXLQLFCQQ",
-  "aws_secret_access_key": "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",
-  "production_ip_address": "172.26.73.152"
+  "wow_api_key": "",
+  "db_connection": "",
+  "db_connection_string": "",
+  "db_name": "",
+  "achievements_object_id": "",
+  "achievements_api_key": "",
+  "aws_access_key_id": "",
+  "aws_secret_access_key": "",
+  "production_ip_address": ""
 }
