@@ -28,7 +28,7 @@ const totalAchievementCounts = {
     'Scenarios': 77
 };
 
-router.post('/armory/create', async (req, res) => {
+router.post('/armory/create', (req, res) => {
     const realm = req.body.serverName.replace(/\\/g, '');
     const name = req.body.characterName;
     const origin = req.body.region;
