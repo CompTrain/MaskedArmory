@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div class="headline">
             <h6>Mount Collection</h6>

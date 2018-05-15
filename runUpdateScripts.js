@@ -27,15 +27,23 @@ function runScript(scriptPath, callback) {
     let process = childProcess.fork(scriptPath);
 
     process.on('error', function (err) {
-        if (invoked) return;
+        if (invoked) {
+            return;
+        }
+
         invoked = true;
         callback(err);
     });
 
     process.on('exit', function (code) {
-        if (invoked) return;
+        if (invoked) {
+            return;
+        }
+
         invoked = true;
+
         let err = code === 0 ? null : new Error('exit code ' + code);
+
         callback(err);
     });
 }

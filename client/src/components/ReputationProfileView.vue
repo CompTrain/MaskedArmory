@@ -1,7 +1,5 @@
 <template>
-
     <div>
-
         <div class="headline">
             <h6>Reputations</h6>
         </div>

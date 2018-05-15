@@ -36,7 +36,7 @@ router.post('/armory/create', (req, res) => {
     const keys = 'stats,professions,titles,items,reputation,mounts,pets,achievements,progression,pvp';
 
     blizzard.wow.character(keys, {realm, name, origin, locale})
-        .then((response) => {
+        .then(async (response) => {
             const armoryData = response.data;
 
             // ****** START :: Handling Raid Zone Progression for T18-T21 ********
@@ -63,169 +63,173 @@ router.post('/armory/create', (req, res) => {
             let achievementsCompleted = armoryData.achievements.achievementsCompleted;
             const achievementsCollection = req.db.collection('achievements');
 
-            achievementsCollection.findOne({"_id": objectId(config.get('achievements_object_id'))}, (err, achievementList) => {
+            let achievementList = await achievementsCollection.findOne({"_id": objectId(config.get('achievements_object_id'))});
 
-                let achievementCounts = {};
-                let categoryAchievements = null;
+            let achievementCounts = {};
+            let categoryAchievements = null;
 
-                let achievementHeaders = achievementList.achievements;
-                let achievementHeadersLength = achievementHeaders.length;
+            let achievementHeaders = achievementList.achievements;
+            let achievementHeadersLength = achievementHeaders.length;
 
-                achievementCounts['Total'] = {};
-                achievementCounts['Total']['count'] = 0;
-                achievementCounts['Total']['total'] = 0;
+            achievementCounts['Total'] = {};
+            achievementCounts['Total']['count'] = 0;
+            achievementCounts['Total']['total'] = 0;
 
-                for (let i = 0; i < achievementHeadersLength; i++) {
+            for (let i = 0; i < achievementHeadersLength; i++) {
 
-                    if (typeof achievementHeaders[i].categories !== 'undefined') {
-                        categoryAchievements = achievementHeaders[i].categories;
-                    }
-
-                    let achievements = achievementHeaders[i].achievements;
-                    let achievementsLength = achievements.length;
-
-                    let specificAchievementCount = 0;
-                    let specificAchievementHeaderName = achievementHeaders[i].name;
-
-                    if (specificAchievementHeaderName === 'Legacy' || specificAchievementHeaderName === 'Feats of Strength') {
-
-                        let specificAchievementDetails = [];
-
-                        if (categoryAchievements != null) {
-
-                            let numberOfCategories = categoryAchievements.length;
-
-                            for (let k = 0; k < numberOfCategories; k++) {
-
-                                let numberOfCategoryAchievements = categoryAchievements[k].achievements.length;
-
-                                for (let l = 0; l < numberOfCategoryAchievements; l++) {
-                                    if (achievementsCompleted.includes(categoryAchievements[k].achievements[l].id)) {
-                                        specificAchievementCount++;
-                                        specificAchievementDetails.push(categoryAchievements[k].achievements[l]);
-                                    }
-                                }
-                            }
-                        }
-
-                        // Loop through the top level achievements that are not in categories.
-                        for (let j = 0; j < achievementsLength; j++) {
-                            if (achievementsCompleted.includes(achievements[j].id)) {
-                                specificAchievementCount++;
-                                specificAchievementDetails.push(achievements[j]);
-                            }
-                        }
-
-                        achievementCounts[specificAchievementHeaderName] = {};
-                        achievementCounts[specificAchievementHeaderName]['count'] = specificAchievementCount;
-                        achievementCounts[specificAchievementHeaderName]['achievements'] = specificAchievementDetails;
-
-                    } else {
-
-                        if (categoryAchievements != null) {
-
-                            let numberOfCategories = categoryAchievements.length;
-
-                            for (let k = 0; k < numberOfCategories; k++) {
-
-                                let numberOfCategoryAchievements = categoryAchievements[k].achievements.length;
-
-                                for (let l = 0; l < numberOfCategoryAchievements; l++) {
-                                    if (achievementsCompleted.includes(categoryAchievements[k].achievements[l].id)) {
-                                        specificAchievementCount++;
-                                    }
-                                }
-                            }
-                        }
-
-                        // Loop through the top level achievements that are not in categories.
-                        for (let j = 0; j < achievementsLength; j++) {
-                            if (achievementsCompleted.includes(achievements[j].id)) {
-                                specificAchievementCount++;
-                            }
-                        }
-
-                        // The period was breaking the mongo insert.
-                        if (specificAchievementHeaderName === 'Player vs. Player') {
-                            specificAchievementHeaderName = 'Player vs Player';
-                        }
-
-                        achievementCounts[specificAchievementHeaderName] = {};
-                        achievementCounts[specificAchievementHeaderName]['count'] = specificAchievementCount;
-                        achievementCounts[specificAchievementHeaderName]['total'] = totalAchievementCounts[specificAchievementHeaderName];
-
-                        achievementCounts['Total']['count'] = achievementCounts['Total']['count'] + specificAchievementCount;
-                        achievementCounts['Total']['total'] = achievementCounts['Total']['total'] + totalAchievementCounts[specificAchievementHeaderName];
-                    }
+                if (typeof achievementHeaders[i].categories !== 'undefined') {
+                    categoryAchievements = achievementHeaders[i].categories;
                 }
 
-                armoryData['achievementCounts'] = achievementCounts;
+                let achievements = achievementHeaders[i].achievements;
+                let achievementsLength = achievements.length;
 
-                // We reformulated the achievement counts, so we don't need to store all of the achievement data anymore.
-                delete armoryData['achievements'];
+                let specificAchievementCount = 0;
+                let specificAchievementHeaderName = achievementHeaders[i].name;
 
-                // ****** END :: Achievement Manipulation ********
+                if (specificAchievementHeaderName === 'Legacy' || specificAchievementHeaderName === 'Feats of Strength') {
 
-                // Need the origin to be in the data store so that we know where to pull
-                // character image renders from the Vue side on armory display.
-                armoryData['origin'] = origin;
+                    let specificAchievementDetails = [];
 
-                const armoryCollection = req.db.collection('armories');
-                const armoryDataFormatted = {'data': armoryData};
+                    if (categoryAchievements != null) {
 
-                armoryCollection.insert(armoryDataFormatted, (err) => {
+                        let numberOfCategories = categoryAchievements.length;
 
-                    if (err) {
-                        return res.status(500).json({err});
+                        for (let k = 0; k < numberOfCategories; k++) {
+
+                            let numberOfCategoryAchievements = categoryAchievements[k].achievements.length;
+
+                            for (let l = 0; l < numberOfCategoryAchievements; l++) {
+                                if (achievementsCompleted.includes(categoryAchievements[k].achievements[l].id)) {
+                                    specificAchievementCount++;
+                                    specificAchievementDetails.push(categoryAchievements[k].achievements[l]);
+                                }
+                            }
+                        }
                     }
 
-                    const objectId = armoryDataFormatted._id;
+                    // Loop through the top level achievements that are not in categories.
+                    for (let j = 0; j < achievementsLength; j++) {
+                        if (achievementsCompleted.includes(achievements[j].id)) {
+                            specificAchievementCount++;
+                            specificAchievementDetails.push(achievements[j]);
+                        }
+                    }
 
-                    res.status(200).json({ profileId: objectId });
-                });
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err.response.data)
+                    achievementCounts[specificAchievementHeaderName] = {};
+                    achievementCounts[specificAchievementHeaderName]['count'] = specificAchievementCount;
+                    achievementCounts[specificAchievementHeaderName]['achievements'] = specificAchievementDetails;
+
+                } else {
+
+                    if (categoryAchievements != null) {
+
+                        let numberOfCategories = categoryAchievements.length;
+
+                        for (let k = 0; k < numberOfCategories; k++) {
+
+                            let numberOfCategoryAchievements = categoryAchievements[k].achievements.length;
+
+                            for (let l = 0; l < numberOfCategoryAchievements; l++) {
+                                if (achievementsCompleted.includes(categoryAchievements[k].achievements[l].id)) {
+                                    specificAchievementCount++;
+                                }
+                            }
+                        }
+                    }
+
+                    // Loop through the top level achievements that are not in categories.
+                    for (let j = 0; j < achievementsLength; j++) {
+                        if (achievementsCompleted.includes(achievements[j].id)) {
+                            specificAchievementCount++;
+                        }
+                    }
+
+                    // The period was breaking the mongo insert.
+                    if (specificAchievementHeaderName === 'Player vs. Player') {
+                        specificAchievementHeaderName = 'Player vs Player';
+                    }
+
+                    achievementCounts[specificAchievementHeaderName] = {};
+                    achievementCounts[specificAchievementHeaderName]['count'] = specificAchievementCount;
+                    achievementCounts[specificAchievementHeaderName]['total'] = totalAchievementCounts[specificAchievementHeaderName];
+
+                    achievementCounts['Total']['count'] = achievementCounts['Total']['count'] + specificAchievementCount;
+                    achievementCounts['Total']['total'] = achievementCounts['Total']['total'] + totalAchievementCounts[specificAchievementHeaderName];
+                }
+            }
+
+            armoryData['achievementCounts'] = achievementCounts;
+
+            // We reformulated the achievement counts, so we don't need to store all of the achievement data anymore.
+            delete armoryData['achievements'];
+
+            // ****** END :: Achievement Manipulation ********
+
+            // Need the origin to be in the data store so that we know where to pull
+            // character image renders from the Vue side on armory display.
+            armoryData['origin'] = origin;
+
+            const armoryCollection = req.db.collection('armories');
+            const armoryDataFormatted = {'data': armoryData};
+
+            try {
+                await armoryCollection.insert(armoryDataFormatted);
+                const objectId = armoryDataFormatted._id;
+                res.status(200).json({ profileId: objectId });
+            } catch (err) {
+                res.status(500).json({ err })
+            }
         });
 });
 
-router.get('/armory/find/:id', (req, res) => {
+router.get('/armory/find/:id', async (req, res) => {
     const profileId = req.params.id;
     const collection = req.db.collection('armories');
 
-    collection.findOne({_id: objectId(profileId)}, (err, document) => {
-        if (err || isEmpty(document)) {
-            return res.status(404).json({ error: 'Armory not found.' });
+    try {
+        let document = await collection.findOne({_id: objectId(profileId)});
+
+        if (isEmpty(document)) {
+            throw new Error();
         }
 
         res.status(200).json({ armory: document.data});
-    });
+    } catch (err) {
+        return res.status(404).json({ error: 'Armory not found.' });
+    }
 });
 
-router.get('/server/us/list', (req, res) => {
+router.get('/server/us/list', async (req, res) => {
     const collection = req.db.collection('usServerList');
 
-    collection.find({}).toArray((err, servers) => {
-        if (err || servers.length === 0) {
-            return res.status(404).json({ error: 'Error retrieving US server list.' });
+    try {
+        let servers = await collection.find({}).toArray();
+
+        if (servers.length === 0) {
+            throw new Error();
         }
 
         res.status(200).json({ usServers: servers});
-    });
+    } catch (err) {
+        return res.status(404).json({ error: 'Error retrieving US server list.' });
+    }
 });
 
-router.get('/server/eu/list', (req, res) => {
+router.get('/server/eu/list', async (req, res) => {
     const collection = req.db.collection('euServerList');
 
-    collection.find({}).toArray((err, servers) => {
-        if (err || servers.length === 0) {
-            return res.status(404).json({ error: 'Error retrieving EU server list.' });
+    try {
+        let servers = await collection.find({}).toArray();
+
+        if (servers.length === 0) {
+            throw new Error();
         }
 
         res.status(200).json({ euServers: servers});
-    });
+    } catch (err) {
+        return res.status(404).json({ error: 'Error retrieving EU server list.' });
+    }
 });
 
 router.post('/report-bug', (req, res) => {

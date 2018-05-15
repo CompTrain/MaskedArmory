@@ -38,18 +38,18 @@ const routes = [
                 name: 'titles',
                 props: true
             },
-            {
-                path: ':profileId/raid-progression',
-                component: ProgressionProfileView,
-                name: 'progression',
-                props: true
-            },
-            {
-                path: ':profileId/player-vs-player',
-                component: PvpProfileView,
-                name: 'pvp',
-                props: true
-            },
+            // {
+            //     path: ':profileId/raid-progression',
+            //     component: ProgressionProfileView,
+            //     name: 'progression',
+            //     props: true
+            // },
+            // {
+            //     path: ':profileId/player-vs-player',
+            //     component: PvpProfileView,
+            //     name: 'pvp',
+            //     props: true
+            // },
             {
                 path: ':profileId/mounts',
                 component: MountProfileView,

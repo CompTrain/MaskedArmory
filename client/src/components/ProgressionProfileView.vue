@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div class="headline">
             <h6>Legion Raid Progression</h6>
@@ -7,11 +6,8 @@
 
         <div class="content-progression">
             <div class="row">
-
                 <div class="col-sm">
-
                     <div class="raidprogress" style="height: 380px;">
-
                         <div class="image">
                             <img class="image-image" src="../assets/images/antorus-the-burning-throne-small.jpg" width="303" height="125">
                         </div>

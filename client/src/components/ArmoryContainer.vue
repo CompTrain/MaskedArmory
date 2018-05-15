@@ -3,7 +3,7 @@
         <nav id="sidebar" v-show="!showSpinner">
             <div class="sidebar-header">
                 <div>
-                    <router-link to="/"><img class="sidebar-logo" src="../assets/images/logo.png" alt="Logo" /></router-link>
+                    <router-link to="/"><img class="sidebar-logo" src="../assets/images/logo-horizontal.png" alt="Logo" /></router-link>
                 </div>
             </div>
 
@@ -16,12 +16,12 @@
                 <li class="sidebar-link":class="{'active': $route.name == 'titles' }">
                     <router-link :to="buildNavLink('titles')"><i class="fas fa-list fa-fw" style="margin-right: 10px;"></i>Titles</router-link>
                 </li>
-                <li v-show="character.armory.progression" class="sidebar-link" :class="{'active': $route.name == 'progression' }">
-                  <router-link :to="buildNavLink('raid-progression')"><i class="fas fa-clipboard-list fa-fw" style="margin-right: 10px;"></i>Legion Raid Progression</router-link>
-                </li>
-                <li v-show="character.armory.pvp" class="sidebar-link" :class="{'active': $route.name == 'pvp' }">
-                  <router-link :to="buildNavLink('player-vs-player')"><i class="fas fa-star fa-fw" style="margin-right: 10px;"></i>Player Vs. Player</router-link>
-                </li>
+                <!--<li v-show="character.armory.progression" class="sidebar-link" :class="{'active': $route.name == 'progression' }">-->
+                  <!--<router-link :to="buildNavLink('raid-progression')"><i class="fas fa-clipboard-list fa-fw" style="margin-right: 10px;"></i>Legion Raid Progression</router-link>-->
+                <!--</li>-->
+                <!--<li v-show="character.armory.pvp" class="sidebar-link" :class="{'active': $route.name == 'pvp' }">-->
+                  <!--<router-link :to="buildNavLink('player-vs-player')"><i class="fas fa-star fa-fw" style="margin-right: 10px;"></i>Player Vs. Player</router-link>-->
+                <!--</li>-->
                 <li class="sidebar-link" :class="{'active': $route.name == 'mounts' }">
                     <router-link :to="buildNavLink('mounts')"><i class="fab fa-sticker-mule fa-fw" style="margin-right: 10px;"></i>Mounts</router-link>
                 </li>

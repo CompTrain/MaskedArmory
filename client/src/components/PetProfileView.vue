@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div class="headline">
             <h6>Pet Collection</h6>

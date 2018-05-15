@@ -1,9 +1,7 @@
 <template>
-
     <div>
-
         <div class="headline">
-            <h6>Main Profile</h6>
+            <h6>Achievements</h6>
         </div>
 
         <div class="content-ach" id="achievementContent">
@@ -176,7 +174,6 @@
                             <p> {{ legacy.description }}</p>
                         </div>
                     </div>
-
                 </div>
                 <div class="clear"></div>
             </div>
