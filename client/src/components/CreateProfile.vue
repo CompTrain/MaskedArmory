@@ -171,8 +171,8 @@
                 usFlagActive: false,
                 euFlagActive: false,
                 armoryError: '',
-                // apiUrl: 'https://api.legion.maskedarmory.com',
-                apiUrl: 'http://localhost:5000',
+                apiUrl: 'https://api.legion.maskedarmory.com',
+                // apiUrl: 'http://localhost:5000',
             }
         },
 
