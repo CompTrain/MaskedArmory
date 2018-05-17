@@ -623,7 +623,7 @@
 
                 if (typeof thumbnail !== 'undefined') {
                     let profilePictureBase = thumbnail.replace('-avatar.jpg', '');
-                    profilePicture = 'https://render-' + origin + '.worldofwarcraft.com/character/' + profilePictureBase + '-profilemain.jpg';
+                    profilePicture = 'https://render-' + origin + '.worldofwarcraft.com/character/' + profilePictureBase + '-main.jpg';
                 } else {
                     profilePicture = '';
                 }
