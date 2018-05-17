@@ -571,7 +571,7 @@
 
         computed: {
             profilePictureCreation() {
-                return `background: url(${this.profilePicture}) no-repeat center; height: 500px`;
+                return `background: url(${this.profilePicture}) no-repeat center/cover; height: 500px`;
             },
         },
 
