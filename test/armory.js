@@ -3,8 +3,8 @@ process.env.NODE_ENV = 'test';
 // Require testing dependencies.
 const mocha = require('mocha');
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-const app = require('../app');
+const supertest = require('supertest');
+const server = require('../server');
 const should = chai.should();
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
@@ -14,9 +14,8 @@ const dookie = require('dookie');
 process.env["NODE_CONFIG_DIR"] = __dirname + "/../config/";
 const config = require('config');
 
-chai.use(chaiHttp);
-
 describe('Armory', () => {
+
     before(async () => {
 
         const url = config.get('db_connection_string');
@@ -45,11 +44,11 @@ describe('Armory', () => {
                 region: 'us'
             };
 
-            chai.request(app)
+            supertest(server)
                 .post('/armory/create')
                 .send(armoryData)
+                .expect(200)
                 .end((err, res) => {
-                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.include.key('profileId');
                     done();
@@ -62,10 +61,10 @@ describe('Armory', () => {
         it('it should GET the armory for the specific character with ID 59fe18b7eae53c6e845e743a', (done) => {
             let armoryId = '59fe18b7eae53c6e845e743a';
 
-            chai.request(app)
+            supertest(server)
                 .get('/armory/find/' + armoryId)
+                .expect(200)
                 .end((err, res) => {
-                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.include.key('armory');
                     res.body.armory.should.include.keys(['items', 'titles', 'mounts', 'pets', 'achievements', 'reputation', 'professions', 'stats']);
@@ -76,10 +75,10 @@ describe('Armory', () => {
         it('it should GET a 404 error as the ID 59fe18b7eae53c6e845e743b does not exist', (done) => {
             let armoryId = '59fe18b7eae53c6e845e743b';
 
-            chai.request(app)
+            supertest(server)
                 .get('/armory/find/' + armoryId)
+                .expect(404)
                 .end((err, res) => {
-                    res.should.have.status(404);
                     res.body.should.have.include.key('error');
                     res.body.should.have.property('error', 'Armory not found.');
                     done();
@@ -90,10 +89,10 @@ describe('Armory', () => {
     describe('/GET server lists', () => {
 
         it('it should GET all US servers', (done) => {
-            chai.request(app)
+            supertest(server)
                 .get('/server/us/list')
+                .expect(200)
                 .end((err, res) => {
-                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.include.key('usServers');
                     done();
@@ -101,10 +100,10 @@ describe('Armory', () => {
         });
 
         it('it should GET all EU servers', (done) => {
-            chai.request(app)
+            supertest(server)
                 .get('/server/eu/list')
+                .expect(200)
                 .end((err, res) => {
-                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.include.key('euServers');
                     done();

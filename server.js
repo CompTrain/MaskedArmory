@@ -1,6 +1,6 @@
 const cluster = require('cluster');
 
-if (!cluster.isMaster) {
+if (process.env.NODE_ENV === 'test' || !cluster.isMaster) {
     const express = require('express');
     const bodyParser = require('body-parser');
     const app = express();
