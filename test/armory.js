@@ -49,6 +49,8 @@ describe('Armory', () => {
                 .send(armoryData)
                 .expect(200)
                 .end((err, res) => {
+                    if (err) return done(err);
+
                     res.body.should.be.a('object');
                     res.body.should.include.key('profileId');
                     done();
@@ -65,6 +67,8 @@ describe('Armory', () => {
                 .get('/armory/find/' + armoryId)
                 .expect(200)
                 .end((err, res) => {
+                    if (err) return done(err);
+
                     res.body.should.be.a('object');
                     res.body.should.include.key('armory');
                     res.body.armory.should.include.keys(['items', 'titles', 'mounts', 'pets', 'achievements', 'reputation', 'professions', 'stats']);
@@ -79,6 +83,8 @@ describe('Armory', () => {
                 .get('/armory/find/' + armoryId)
                 .expect(404)
                 .end((err, res) => {
+                    if (err) return done(err);
+
                     res.body.should.have.include.key('error');
                     res.body.should.have.property('error', 'Armory not found.');
                     done();
@@ -93,6 +99,8 @@ describe('Armory', () => {
                 .get('/server/us/list')
                 .expect(200)
                 .end((err, res) => {
+                    if (err) return done(err);
+
                     res.body.should.be.a('object');
                     res.body.should.include.key('usServers');
                     done();
@@ -104,6 +112,8 @@ describe('Armory', () => {
                 .get('/server/eu/list')
                 .expect(200)
                 .end((err, res) => {
+                    if (err) return done(err);
+
                     res.body.should.be.a('object');
                     res.body.should.include.key('euServers');
                     done();
