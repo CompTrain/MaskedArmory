@@ -47,6 +47,8 @@ describe('Armory', () => {
             supertest(server)
                 .post('/armory/create')
                 .send(armoryData)
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -65,6 +67,7 @@ describe('Armory', () => {
 
             supertest(server)
                 .get('/armory/find/' + armoryId)
+                .expect('Content-Type', /json/)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -81,6 +84,7 @@ describe('Armory', () => {
 
             supertest(server)
                 .get('/armory/find/' + armoryId)
+                .expect('Content-Type', /json/)
                 .expect(404)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -97,6 +101,7 @@ describe('Armory', () => {
         it('it should GET all US servers', (done) => {
             supertest(server)
                 .get('/server/us/list')
+                .expect('Content-Type', /json/)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
@@ -110,6 +115,7 @@ describe('Armory', () => {
         it('it should GET all EU servers', (done) => {
             supertest(server)
                 .get('/server/eu/list')
+                .expect('Content-Type', /json/)
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err);
