@@ -39,7 +39,7 @@ function manageCluster() {
 
     console.log('Master cluster setting up ' + numWorkers + ' workers...');
 
-    for(let i = 0; i < numWorkers; i++) {
+    for (let i = 0; i < numWorkers; i++) {
         cluster.fork();
     }
 

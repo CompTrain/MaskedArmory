@@ -1,3 +1,6 @@
+const mongo = require('mongodb');
+const objectId = mongo.ObjectId;
+
 process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 let config = require('config');
 
@@ -23,6 +26,13 @@ const totalAchievementCounts = {
     'Scenarios': 77
 };
 
+/**
+ * Handles the creation of the actual armory by pulling information from Blizzard's API for WoW.
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function createArmory(req, res) {
     const realm = req.body.serverName.replace(/\\/g, '');
     const name = req.body.characterName;
@@ -173,6 +183,7 @@ async function createArmory(req, res) {
                 const objectId = armoryDataFormatted._id;
                 return res.status(200).send({ status: 'success', data: { profileId: objectId }});
             } catch (err) {
+                console.log(err);
                 return res.status(500).send({ status: 'error', message: err })
             }
         });

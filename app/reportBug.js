@@ -1,6 +1,12 @@
 process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 let config = require('config');
 
+/**
+ * Sends an e-mail to our support via AWS SES.
+ *
+ * @param req
+ * @param res
+ */
 function reportBug(req, res) {
     const name = req.body.name;
     const email = req.body.email;

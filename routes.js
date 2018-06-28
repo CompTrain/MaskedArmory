@@ -6,7 +6,7 @@ const findArmory = require('./app/findArmory');
 const getServers = require('./app/getServers');
 const reportBug = require('./app/reportBug');
 
-router.post('/v1//armory', createArmory);
+router.post('/v1/armory', createArmory);
 router.get('/v1/armory/:id', findArmory);
 router.get('/v1/server/us', getServers.getUsServers);
 router.get('/v1/server/eu', getServers.getEuServers);

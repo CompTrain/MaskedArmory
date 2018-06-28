@@ -1,3 +1,10 @@
+/**
+ * Gets the entire US server list.
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 async function getUsServers(req, res)
 {
     const collection = req.db.collection('usServerList');
@@ -11,10 +18,18 @@ async function getUsServers(req, res)
             return res.status(404).json({ status: 'error', message: 'Error retrieving US server list.' });
         }
     } catch (err) {
-        return res.status(404).send({ status: 'error', 'message': 'Error retrieving US server list.' });
+        console.log(err);
+        return res.status(500).send({ status: 'error', 'message': err });
     }
 }
 
+/**
+ * Gets the entire EU server list.
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 async function getEuServers(req, res)
 {
     const collection = req.db.collection('euServerList');
@@ -28,7 +43,8 @@ async function getEuServers(req, res)
             return res.status(404).json({ status: 'error', message: 'Error retrieving EU server list.' });
         }
     } catch (err) {
-        return res.status(404).json({ status: 'error', message: 'Error retrieving EU server list.' });
+        console.log(err);
+        return res.status(500).json({ status: 'error', message: err });
     }
 }
 
