@@ -15,7 +15,7 @@ async function getUsServers(req, res)
         if (servers.length !== 0) {
             return res.status(200).send({ status: 'success', data: { usServers: servers }});
         } else {
-            return res.status(404).json({ status: 'error', message: 'Error retrieving US server list.' });
+            return res.status(404).send({ status: 'error', message: 'Error retrieving US server list.' });
         }
     } catch (err) {
         console.log(err);
@@ -40,11 +40,11 @@ async function getEuServers(req, res)
         if (servers.length !== 0) {
             return res.status(200).send({ status: 'success', data: { euServers: servers }});
         } else {
-            return res.status(404).json({ status: 'error', message: 'Error retrieving EU server list.' });
+            return res.status(404).send({ status: 'error', message: 'Error retrieving EU server list.' });
         }
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ status: 'error', message: err });
+        return res.status(500).send({ status: 'error', message: err });
     }
 }
 

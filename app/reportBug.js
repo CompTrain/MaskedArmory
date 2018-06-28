@@ -34,7 +34,7 @@ function reportBug(req, res) {
             console.log(err);
             console.log(data);
             console.log(sesRes);
-            return res.status(500).status({ status: 'error', message: err });
+            return res.status(500).send({ status: 'error', message: err });
         }
 
         return res.status(200).send({ status: 'success', data: {} });
