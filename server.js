@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'test' || !cluster.isMaster) {
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
-    app.use('/', require('./app'));
+    app.use('/', require('./routes'));
 
     if (config.util.NODE_ENV === 'production') {
         module.exports = app.listen(5000, config.get('production_ip_address'), () => {

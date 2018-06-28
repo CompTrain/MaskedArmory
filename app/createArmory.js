@@ -1,8 +1,3 @@
-const mongo = require('mongodb');
-const express = require('express');
-const router = express.Router();
-const objectId = mongo.ObjectId;
-
 process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 let config = require('config');
 
@@ -28,7 +23,7 @@ const totalAchievementCounts = {
     'Scenarios': 77
 };
 
-router.post('/armory/create', (req, res) => {
+async function createArmory(req, res) {
     const realm = req.body.serverName.replace(/\\/g, '');
     const name = req.body.characterName;
     const origin = req.body.region;
@@ -176,101 +171,11 @@ router.post('/armory/create', (req, res) => {
             try {
                 await armoryCollection.insert(armoryDataFormatted);
                 const objectId = armoryDataFormatted._id;
-                res.status(200).json({ profileId: objectId });
+                return res.status(200).send({ status: 'success', data: { profileId: objectId }});
             } catch (err) {
-                res.status(500).json({ err })
+                return res.status(500).send({ status: 'error', message: err })
             }
         });
-});
-
-router.get('/armory/find/:id', async (req, res) => {
-    const profileId = req.params.id;
-    const collection = req.db.collection('armories');
-
-    try {
-        let document = await collection.findOne({_id: objectId(profileId)});
-
-        if (isEmpty(document)) {
-            throw new Error();
-        }
-
-        res.status(200).json({ armory: document.data});
-    } catch (err) {
-        return res.status(404).json({ error: 'Armory not found.' });
-    }
-});
-
-router.get('/server/us/list', async (req, res) => {
-    const collection = req.db.collection('usServerList');
-
-    try {
-        let servers = await collection.find({}).toArray();
-
-        if (servers.length === 0) {
-            throw new Error();
-        }
-
-        res.status(200).json({ usServers: servers});
-    } catch (err) {
-        return res.status(404).json({ error: 'Error retrieving US server list.' });
-    }
-});
-
-router.get('/server/eu/list', async (req, res) => {
-    const collection = req.db.collection('euServerList');
-
-    try {
-        let servers = await collection.find({}).toArray();
-
-        if (servers.length === 0) {
-            throw new Error();
-        }
-
-        res.status(200).json({ euServers: servers});
-    } catch (err) {
-        return res.status(404).json({ error: 'Error retrieving EU server list.' });
-    }
-});
-
-router.post('/report-bug', (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const explanation = req.body.explanation;
-
-    const ses = require('node-ses');
-    const sesClient = ses.createClient({ key: config.get('aws_access_key_id'), secret: config.get('aws_secret_access_key') });
-
-    sesClient.sendEmail({
-        to: 'shanej@khaccounts.net',
-        from: 'shanej@khaccounts.net',
-        subject: 'New Bug Report | Site Feedback',
-        message: `Bug has been reported or feedback has been given:
-            
-                <strong>Name:</strong> ${name}
-                <strong>Email:</strong> ${email}
-                <strong>Explanation:</strong> ${explanation}`,
-        altText: `Bug has been reported or feedback has been given:
-            
-                Name: ${name}
-                Email: ${email}
-                Explanation: ${explanation}`
-    }, (err, data, res) => {
-        console.log(err);
-        console.log(data);
-        console.log(res);
-    });
-
-    res.json({ success: true });
-});
-
-module.exports = router;
-
-function isEmpty(obj) {
-    for (let key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            return false;
-        }
-    }
-
-    return true;
 }
+
+module.exports = createArmory;
